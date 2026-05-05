@@ -1,0 +1,367 @@
+{
+  "description": "Training examples for SFM-IFM asset mapping. Used to fine-tune or few-shot prompt the LLM.",
+  "version": "1.0",
+  "categories": {
+    "perfect_match": [
+      {
+        "id": "PM001",
+        "sfm": {
+          "nav_name": "BLR 01A",
+          "equip_type": "Boiler",
+          "equip_make": "Raypak",
+          "equip_model": "H7-1505A",
+          "equip_serial": "1405379543",
+          "country": "United States",
+          "state": "CA",
+          "city": "Pleasanton",
+          "site_name": "Pleasanton Campus - Building A"
+        },
+        "ifm": {
+          "asset_id": "0f2a3574-ac78-4774-9493-d42172744502",
+          "asset_name": "Boiler, Steam, Fire Tube, Oil/Gas, <150 BHP(BLR-AR-1)",
+          "position_name": "BLR-AR-1",
+          "manufacturer": "Raypak",
+          "model": "H7-1505A",
+          "serial_number": "1405379543",
+          "building_name": "Pleasanton Campus - Building A",
+          "region_name": "US, CA, Pleasanton"
+        },
+        "match_type": "Perfect - Approach 1",
+        "confidence": 97,
+        "reasoning": "Nav name 'BLR 01A' matches position name 'BLR-AR-1' at 90%+. Make, model, serial all match exactly. Location matches."
+      },
+      {
+        "id": "PM002",
+        "sfm": {
+          "nav_name": "EF 03A",
+          "equip_type": "Exhaust Fan",
+          "equip_make": "Centrimaster",
+          "equip_model": "UNK",
+          "equip_serial": "UNK1196",
+          "country": "United States",
+          "state": "CA",
+          "city": "Pleasanton",
+          "site_name": "Pleasanton Campus - Building A"
+        },
+        "ifm": {
+          "asset_id": "80563602-b264-4a00-9953-de608990af65",
+          "asset_name": "Exhaust Fan, Large(EF-AR-3 (Serves Elec Rms))",
+          "position_name": "EF-AR-3 (Serves Elec Rms)",
+          "manufacturer": "Centrimaster",
+          "model": "UNK",
+          "serial_number": "UNK1196",
+          "building_name": "Pleasanton Campus - Building A",
+          "region_name": "US, CA, Pleasanton"
+        },
+        "match_type": "Perfect - Approach 2",
+        "confidence": 91,
+        "reasoning": "Equipment type 'Exhaust Fan' matches. Name 'EF 03A' vs 'EF-AR-3' fuzzy 90%+. Location and building match."
+      },
+      {
+        "id": "PM003",
+        "sfm": {
+          "nav_name": "AHU-001",
+          "equip_type": "Air Handling Unit",
+          "equip_make": "Trane",
+          "equip_model": "CLCH-D24",
+          "equip_serial": "TRN20190042",
+          "country": "United States",
+          "state": "TX",
+          "city": "Dallas",
+          "site_name": "Dallas Tower - Floor 3"
+        },
+        "ifm": {
+          "asset_id": "ahu-001-dallas-tx",
+          "asset_name": "Air Handling Unit, Large(AHU-001)",
+          "position_name": "AHU-001",
+          "manufacturer": "Trane",
+          "model": "CLCH-D24",
+          "serial_number": "TRN20190042",
+          "building_name": "Dallas Tower",
+          "region_name": "US, TX, Dallas"
+        },
+        "match_type": "Perfect - Approach 1",
+        "confidence": 99,
+        "reasoning": "Perfect name, make, model, serial, and location match."
+      },
+      {
+        "id": "PM004",
+        "sfm": {
+          "nav_name": "CHILLER-2B",
+          "equip_type": "Chiller",
+          "equip_make": "Carrier",
+          "equip_model": "30XA-400",
+          "equip_serial": "CAR2018001B",
+          "country": "United States",
+          "state": "IL",
+          "city": "Chicago",
+          "site_name": "Chicago HQ Building B"
+        },
+        "ifm": {
+          "asset_id": "chiller-b-chicago-il",
+          "asset_name": "Chiller, Centrifugal, Water Cooled(CHILLER-2B)",
+          "position_name": "CHILLER-2B",
+          "manufacturer": "Carrier",
+          "model": "30XA-400",
+          "serial_number": "CAR2018001B",
+          "building_name": "Chicago HQ Building B",
+          "region_name": "US, IL, Chicago"
+        },
+        "match_type": "Perfect - Approach 1",
+        "confidence": 98,
+        "reasoning": "All fields match precisely."
+      },
+      {
+        "id": "PM005",
+        "sfm": {
+          "nav_name": "FCU-301",
+          "equip_type": "Fan Coil Unit",
+          "equip_make": "Daikin",
+          "equip_model": "FWF04",
+          "equip_serial": "",
+          "country": "United States",
+          "state": "GA",
+          "city": "Atlanta",
+          "site_name": "Atlanta Office Park"
+        },
+        "ifm": {
+          "asset_id": "fcu-301-atlanta",
+          "asset_name": "Fan Coil Unit(FCU-301)",
+          "position_name": "FCU-301",
+          "manufacturer": "Daikin",
+          "model": "FWF04",
+          "serial_number": "",
+          "building_name": "Atlanta Office Park",
+          "region_name": "US, GA, Atlanta"
+        },
+        "match_type": "Perfect - Approach 3",
+        "confidence": 93,
+        "reasoning": "No serial number in either system. Make, model, location, building match. Name match secondary."
+      }
+    ],
+    "partial_match": [
+      {
+        "id": "PAR001",
+        "sfm": {
+          "nav_name": "EF 01B",
+          "equip_type": "Exhaust Fan",
+          "equip_make": "UNK",
+          "equip_model": "UNK",
+          "equip_serial": "UNK1197",
+          "country": "United States",
+          "state": "CA",
+          "city": "Pleasanton",
+          "site_name": "Pleasanton Campus Building B"
+        },
+        "ifm": {
+          "asset_id": "d70922c6-574d-4ea7-8789-90e2a9d212be",
+          "asset_name": "Fan, Exhaust, Large (Three-Phase Motor)(EF-BR-1)",
+          "position_name": "EF-BR-1",
+          "manufacturer": "UNK",
+          "model": "UNK",
+          "serial_number": "UNK1197",
+          "building_name": "Pleasanton Campus - Building B",
+          "region_name": "US, CA, Pleasanton"
+        },
+        "match_type": "Partial - Approach 1",
+        "confidence": 68,
+        "reasoning": "Name 'EF 01B' vs 'EF-BR-1' is a 60% match. Make/model unknown in both. Location matches. Building partially matches."
+      },
+      {
+        "id": "PAR002",
+        "sfm": {
+          "nav_name": "PUMP-HTW-03",
+          "equip_type": "Pump",
+          "equip_make": "",
+          "equip_model": "",
+          "equip_serial": "",
+          "country": "United States",
+          "state": "NY",
+          "city": "New York",
+          "site_name": "NYC Office Tower"
+        },
+        "ifm": {
+          "asset_id": "pump-htw-nyc-03",
+          "asset_name": "Hot Water Pump(HWP-03)",
+          "position_name": "HWP-03",
+          "manufacturer": "",
+          "model": "",
+          "serial_number": "",
+          "building_name": "NYC Office Tower - Level B1",
+          "region_name": "US, NY, New York"
+        },
+        "match_type": "Partial - Approach 1",
+        "confidence": 55,
+        "reasoning": "Name differs ('PUMP-HTW-03' vs 'HWP-03') but both refer to hot water pump. Location matches well. Building partially matches."
+      },
+      {
+        "id": "PAR003",
+        "sfm": {
+          "nav_name": "RTU-05",
+          "equip_type": "Rooftop Unit",
+          "equip_make": "Lennox",
+          "equip_model": "LGH180",
+          "equip_serial": "LNX2017005",
+          "country": "United States",
+          "state": "AZ",
+          "city": "Phoenix",
+          "site_name": "Phoenix Distribution Ctr"
+        },
+        "ifm": {
+          "asset_id": "rtu-phoenix-05",
+          "asset_name": "Rooftop Package Unit(RTU-PHX-005)",
+          "position_name": "RTU-PHX-005",
+          "manufacturer": "Lennox",
+          "model": "LGH180",
+          "serial_number": "LNX2017005",
+          "building_name": "Phoenix Distribution Center",
+          "region_name": "US, AZ, Phoenix"
+        },
+        "match_type": "Partial - Approach 2",
+        "confidence": 72,
+        "reasoning": "Name 'RTU-05' vs 'RTU-PHX-005' at 55%. Make/model/serial match perfectly. Location and building match."
+      },
+      {
+        "id": "PAR004",
+        "sfm": {
+          "nav_name": "VAV Box 412",
+          "equip_type": "VAV",
+          "equip_make": "Johnson Controls",
+          "equip_model": "VAV-SD",
+          "equip_serial": "",
+          "country": "United States",
+          "state": "WA",
+          "city": "Seattle",
+          "site_name": "Seattle Campus West Wing"
+        },
+        "ifm": {
+          "asset_id": "vav-412-seattle",
+          "asset_name": "VAV Box, Single Duct(VAV-412)",
+          "position_name": "VAV-412",
+          "manufacturer": "Johnson Controls",
+          "model": "VAV-SD",
+          "serial_number": "",
+          "building_name": "Seattle Campus West",
+          "region_name": "US, WA, Seattle"
+        },
+        "match_type": "Partial - Approach 2",
+        "confidence": 65,
+        "reasoning": "Name '412' appears in both. Make and model match. Building 'West Wing' vs 'West' is 75%. Location matches."
+      }
+    ],
+    "no_match": [
+      {
+        "id": "NM001",
+        "sfm": {
+          "nav_name": "DECOMMISSIONED-007",
+          "equip_type": "Generator",
+          "equip_make": "Caterpillar",
+          "equip_model": "3516C",
+          "equip_serial": "CAT2005007",
+          "country": "United States",
+          "state": "CA",
+          "city": "San Francisco",
+          "site_name": "SF HQ - Basement"
+        },
+        "ifm": null,
+        "match_type": "No Match",
+        "confidence": 0,
+        "reasoning": "Asset was decommissioned and removed from IFM Hub. Serial CAT2005007 not found in any IFM record."
+      },
+      {
+        "id": "NM002",
+        "sfm": {
+          "nav_name": "NEW-AHU-999",
+          "equip_type": "Air Handling Unit",
+          "equip_make": "Carrier",
+          "equip_model": "39HQ",
+          "equip_serial": "CAR2026999",
+          "country": "United States",
+          "state": "FL",
+          "city": "Miami",
+          "site_name": "Miami Innovation Hub"
+        },
+        "ifm": null,
+        "match_type": "No Match",
+        "confidence": 0,
+        "reasoning": "New asset added to SFM in 2026 but not yet provisioned in IFM Hub. Data sync lag."
+      },
+      {
+        "id": "NM003",
+        "sfm": {
+          "nav_name": "EQ-LEGACY-X1",
+          "equip_type": "",
+          "equip_make": "",
+          "equip_model": "",
+          "equip_serial": "",
+          "country": "",
+          "state": "",
+          "city": "",
+          "site_name": ""
+        },
+        "ifm": null,
+        "match_type": "No Match",
+        "confidence": 0,
+        "reasoning": "Incomplete SFM record – all fields are blank. Cannot match without any identifying information."
+      },
+      {
+        "id": "NM004",
+        "sfm": {
+          "nav_name": "CHILLER-RENTAL-TMP",
+          "equip_type": "Chiller",
+          "equip_make": "Aggreko",
+          "equip_model": "TEMP-UNIT",
+          "equip_serial": "AGG2025TMP",
+          "country": "United States",
+          "state": "TX",
+          "city": "Houston",
+          "site_name": "Houston Temporary Site"
+        },
+        "ifm": null,
+        "match_type": "No Match",
+        "confidence": 0,
+        "reasoning": "Temporary rental equipment tracked in SFM but not added to IFM Hub permanent asset registry."
+      }
+    ],
+    "edge_cases": [
+      {
+        "id": "EC001",
+        "description": "Same asset, different naming conventions",
+        "sfm": {"nav_name": "BOILER-1A"},
+        "ifm_candidates": [
+          {"asset_name": "Boiler-1A", "position_name": "BLR-1A"},
+          {"asset_name": "Steam Boiler Unit 1-A", "position_name": "BLR-AR-1A"}
+        ],
+        "correct_match": "BLR-1A",
+        "reasoning": "Direct tokenized match despite different separators and casing."
+      },
+      {
+        "id": "EC002",
+        "description": "Abbreviation vs full name",
+        "sfm": {"nav_name": "EF-03"},
+        "ifm_candidates": [
+          {"asset_name": "Exhaust Fan 03", "position_name": "EF-03"},
+          {"asset_name": "Electric Feed Unit 3", "position_name": "EFU-3"}
+        ],
+        "correct_match": "EF-03",
+        "reasoning": "EF is abbreviation for Exhaust Fan. Token set ratio handles this."
+      },
+      {
+        "id": "EC003",
+        "description": "Duplicate asset names in IFM – must use location/serial to disambiguate",
+        "sfm": {
+          "nav_name": "AHU-01",
+          "equip_serial": "TRN001A",
+          "city": "Austin",
+          "site_name": "Austin Campus A"
+        },
+        "ifm_candidates": [
+          {"asset_name": "AHU-01", "serial_number": "TRN001A", "building_name": "Austin Campus A"},
+          {"asset_name": "AHU-01", "serial_number": "TRN001B", "building_name": "Austin Campus B"}
+        ],
+        "correct_match": "serial TRN001A in Austin Campus A",
+        "reasoning": "Name is identical but serial number and building disambiguate the correct record."
+      }
+    ]
+  }
+}
