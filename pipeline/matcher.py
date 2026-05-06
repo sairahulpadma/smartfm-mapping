@@ -92,7 +92,14 @@ def _serial_score(sfm: dict, ifm: dict) -> float:
 # ── individual approach scorers ───────────────────────────────────────────────
 
 def _score_approach1(sfm: dict, ifm: dict) -> Optional[float]:
-    """Perfect-1: Name≥90 + Make≥95 + Model≥95 + Serial=100 + Location≥90"""
+    """Perfect-1: Name≥90 + Make≥95 + Model≥95 + Serial=100 + Location≥90
+
+    Requires at least one non-blank hardware identifier (make/model/serial) in SFM.
+    Records with no identifiers should fall through to Approach 2 or Partial nodes.
+    """
+    # Gate: SFM must carry at least one hardware identifier
+    if not any(_s(sfm.get(k)) for k in ("equip_make", "equip_model", "equip_serial")):
+        return None
     if not _equip_type_ok(sfm, ifm):
         return None
     ns = _name_score(sfm, ifm)
@@ -130,7 +137,15 @@ def _score_approach2(sfm: dict, ifm: dict) -> Optional[float]:
 
 
 def _score_approach3(sfm: dict, ifm: dict) -> Optional[float]:
-    """Perfect-3: EquipType + Make≥95 + Model≥95 + Serial=100 + Location≥85 + Building≥75"""
+    """Perfect-3: EquipType + Make≥95 + Model≥95 + Serial=100 + Location≥85 + Building≥75
+
+    Requires at least one non-blank hardware identifier in SFM.  Records with no
+    identifiers fall through to Approach 2 or Partial nodes — Approach 3 must not
+    become a catch-all for location+type matches.
+    """
+    # Gate: SFM must carry at least one hardware identifier
+    if not any(_s(sfm.get(k)) for k in ("equip_make", "equip_model", "equip_serial")):
+        return None
     if not _equip_type_ok(sfm, ifm):
         return None
     mk = _make_score(sfm, ifm)

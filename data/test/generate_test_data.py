@@ -164,6 +164,60 @@ SFM_DATA = [
         "country": "United States", "state": "IN", "city": "Indianapolis",
         "site_name": "Indy Manufacturing",  # vs "Indianapolis Manufacturing Facility" → ~68%
     },
+    # ── Perfect Approach 2 (equip_type + name + location + building, no make/model/serial) ─
+    # Name ≥ 90%, location ≥ 85%, building ≥ 75% — triggers Approach 2
+    {
+        "nav_name": "COOLING-CTRL-01",      # IFM: "Cooling System Controller(COOL-CTRL-01)"
+        "equip_type": "BAS Controller",
+        "equip_make": "", "equip_model": "", "equip_serial": "",
+        "country": "United States", "state": "GA", "city": "Savannah",
+        "site_name": "Savannah Operations Center",
+    },
+    {
+        "nav_name": "FCU-B2-L01",           # IFM: "Fan Coil Unit B2 Level 1(FCU-B2-L01)"
+        "equip_type": "Fan Coil Unit",
+        "equip_make": "", "equip_model": "", "equip_serial": "",
+        "country": "United States", "state": "MN", "city": "Minneapolis",
+        "site_name": "Minneapolis North Tower",
+    },
+    # ── Extra Partial Approach 2 (name ~55%, make matches, location matches) ──────────────
+    {
+        "nav_name": "PUMP-CND-2",           # vs IFM "Condenser Water Pump No. 2" → ~58%
+        "equip_type": "Pump",
+        "equip_make": "Armstrong", "equip_model": "", "equip_serial": "",
+        "country": "United States", "state": "WI", "city": "Milwaukee",
+        "site_name": "Milwaukee Central Plant",  # vs "Milwaukee Central Utility Plant"
+    },
+    {
+        "nav_name": "BLDG-CTRL-02",         # vs IFM "Building Automation Controller 02" → ~60%
+        "equip_type": "BAS Controller",
+        "equip_make": "Siemens", "equip_model": "Desigo", "equip_serial": "",
+        "country": "United States", "state": "PA", "city": "Pittsburgh",
+        "site_name": "Pittsburgh Campus East",
+    },
+    # ── Extra LLM Reasoned (semantic abbreviation gap — no make/model/serial) ──────────────
+    {
+        "nav_name": "STANDBY-GEN-A",        # LLM: "Emergency Backup Generator Unit Alpha"
+        "equip_type": "Generator",
+        "equip_make": "", "equip_model": "", "equip_serial": "",
+        "country": "United States", "state": "AZ", "city": "Tucson",
+        "site_name": "Tucson Data Hub",
+    },
+    {
+        "nav_name": "CHILLR-B",             # LLM: "Commercial Water Chiller System B"
+        "equip_type": "Chiller",
+        "equip_make": "", "equip_model": "", "equip_serial": "",
+        "country": "United States", "state": "NC", "city": "Charlotte",
+        "site_name": "Charlotte Cooling Plant",
+    },
+    # ── No match (intentionally unmatched) ───────────────────────────────────────────
+    {
+        "nav_name": "XFMR-MAIN-480V",       # Transformer — not in IFM
+        "equip_type": "Transformer",
+        "equip_make": "ABB", "equip_model": "ONAN-500", "equip_serial": "ABB2024480",
+        "country": "United States", "state": "OH", "city": "Cincinnati",
+        "site_name": "Cincinnati Substation",
+    },
     # ── LLM Reasoned (name too different for fuzzy, NO make/model/serial to prevent Approach 3) ─
     # These require LLM to recognise e.g. "HVAC-1" == "Air Handling System Unit 1"
     {
@@ -223,9 +277,11 @@ SFM_DATA = [
         "country": "United States", "state": "NV", "city": "Las Vegas",
         "site_name": "Las Vegas Warehouse",
     },
-]
+]  # end SFM_DATA
 
-# ── IFM Records (25 total — includes 10 perfect + 5 partial + 10 extras) ─────
+# ── IFM Records (41 total — 10 perfect + 5 partial + 5 partial-extra + 3 LLM-original
+#                            + 2 approach2-targets + 2 partial2-targets
+#                            + 2 llm-extra + 1 no-match-decoy + 10 extras) ──────────────
 IFM_DATA = [
     # ── Perfect match targets ─────────────────────────────────────────────────
     {
@@ -430,7 +486,7 @@ IFM_DATA = [
         "asset_name": "Heating Coil Unit 3",
         "asset_status": "ACTIVE", "manufacturer": "", "serial_number": "", "model": "",
         "equip_part_description": "Heating Coil",
-        "position_name": "HC-3",
+        "position_name": "HTG-03",              # 62.5% vs SFM nav_name HTG-UNIT-3 → Partial 1 fires
         "position_type_description": "Heating Unit",
         "region_name": "US, CO, Denver",
         "building_name": "Denver East Office",
@@ -450,9 +506,9 @@ IFM_DATA = [
     {
         "asset_id": "IFM-P03", "asset_alternate_id": "ALTP-03",
         "asset_name": "Condenser Water Pump Loop 1",
-        "asset_status": "ACTIVE", "manufacturer": "Taco", "serial_number": "", "model": "",
+        "asset_status": "ACTIVE", "manufacturer": "", "serial_number": "", "model": "",  # blank — SFM COND-WATER-PMP-1 has make=Taco → mismatch → approach 3 fails → partial fires
         "equip_part_description": "Condenser Water Pump",
-        "position_name": "CWP-Loop-1",
+        "position_name": "COND-PMP-01",         # 74.1% vs SFM nav_name COND-WATER-PMP-1 → Partial 1 fires
         "position_type_description": "Pump",
         "region_name": "US, MO, Kansas City",
         "building_name": "Kansas City Service Depot",
@@ -472,7 +528,7 @@ IFM_DATA = [
     {
         "asset_id": "IFM-P05", "asset_alternate_id": "ALTP-05",
         "asset_name": "Compressed Air System Shop Floor",
-        "asset_status": "ACTIVE", "manufacturer": "Ingersoll Rand",
+        "asset_status": "ACTIVE", "manufacturer": "",  # blank — SFM AIR-COMP-SHOP has make=Ingersoll Rand → mismatch → approach 3 fails → partial fires
         "serial_number": "", "model": "",
         "equip_part_description": "Air Compressor",
         "position_name": "AIR-COMP-01",
@@ -649,6 +705,75 @@ IFM_DATA = [
         "floor_name": "Level B2", "room_name": "Mechanical Room",
         "customer_name": "Clorox",
     },
+    # ── Approach-2 targets (name matches, no make/model/serial) ──────────────
+    {
+        "asset_id": "IFM-A01", "asset_alternate_id": "ALTA-01",
+        "asset_name": "Cooling System Controller(COOLING-CTRL-01)",
+        "asset_status": "ACTIVE", "manufacturer": "", "serial_number": "", "model": "",
+        "equip_part_description": "BAS Controller",
+        "position_name": "COOLING-CTRL-01",  # exact match for nav_name → name score 100% → Approach 2 fires
+        "position_type_description": "BAS Controller",
+        "region_name": "US, GA, Savannah",
+        "building_name": "Savannah Operations Center",
+        "floor_name": "Level 2", "room_name": "Control Room", "customer_name": "Clorox",
+    },
+    {
+        "asset_id": "IFM-A02", "asset_alternate_id": "ALTA-02",
+        "asset_name": "Fan Coil Unit B2 Level 1(FCU-B2-L01)",
+        "asset_status": "ACTIVE", "manufacturer": "", "serial_number": "", "model": "",
+        "equip_part_description": "Fan Coil Unit",
+        "position_name": "FCU-B2-L01",
+        "position_type_description": "Fan Coil Unit",
+        "region_name": "US, MN, Minneapolis",
+        "building_name": "Minneapolis North Tower",
+        "floor_name": "Level B2", "room_name": "Room 101", "customer_name": "Clorox",
+    },
+    # ── Partial-2 targets (name ~55-60%, make/location matches) ──────────────
+    {
+        "asset_id": "IFM-A03", "asset_alternate_id": "ALTA-03",
+        "asset_name": "Condenser Water Pump No. 2",
+        "asset_status": "ACTIVE", "manufacturer": "", "serial_number": "", "model": "",  # blank manufacturer — SFM has Armstrong, mismatch → approach 3 fails → partial fires
+        "equip_part_description": "Condenser Water Pump",
+        "position_name": "PUMP-C-002",          # 80.0% vs SFM nav_name PUMP-CND-2 → Partial 1 fires
+        "position_type_description": "Pump",
+        "region_name": "US, WI, Milwaukee",
+        "building_name": "Milwaukee Central Utility Plant",
+        "floor_name": "Level B1", "room_name": "Pump Room", "customer_name": "Clorox",
+    },
+    {
+        "asset_id": "IFM-A04", "asset_alternate_id": "ALTA-04",
+        "asset_name": "Building Automation Controller 02",
+        "asset_status": "ACTIVE", "manufacturer": "Siemens", "serial_number": "", "model": "Desigo",
+        "equip_part_description": "BAS Controller",
+        "position_name": "BAC-02",
+        "position_type_description": "BAS Controller",
+        "region_name": "US, PA, Pittsburgh",
+        "building_name": "Pittsburgh Campus East Wing",
+        "floor_name": "Floor 1", "room_name": "Mechanical Room", "customer_name": "Clorox",
+    },
+    # ── LLM Reasoned extra targets (semantic gap, blank make/model/serial) ────
+    {
+        "asset_id": "IFM-A05", "asset_alternate_id": "ALTA-05",
+        "asset_name": "Emergency Backup Generator Unit Alpha",
+        "asset_status": "ACTIVE", "manufacturer": "", "serial_number": "", "model": "",
+        "equip_part_description": "Emergency Generator",
+        "position_name": "EBG-ALPHA",
+        "position_type_description": "Generator",
+        "region_name": "US, AZ, Tucson",
+        "building_name": "Tucson Data Hub",
+        "floor_name": "Ground", "room_name": "Generator Pad", "customer_name": "Clorox",
+    },
+    {
+        "asset_id": "IFM-A06", "asset_alternate_id": "ALTA-06",
+        "asset_name": "Commercial Water Chiller System B",
+        "asset_status": "ACTIVE", "manufacturer": "", "serial_number": "", "model": "",
+        "equip_part_description": "Chiller",
+        "position_name": "CWC-B",
+        "position_type_description": "Chiller",
+        "region_name": "US, NC, Charlotte",
+        "building_name": "Charlotte Cooling Plant",
+        "floor_name": "Level B1", "room_name": "Chiller Plant", "customer_name": "Clorox",
+    },
 ]
 
 
@@ -666,11 +791,13 @@ def generate():
     print(f"✅ Generated {ifm_path}  ({len(ifm_df)} IFM records)")
     print()
     print("Expected results:")
-    print("  🟢 10 Perfect matches   (BLR-01A → COOLING-TWR-1)")
+    print("  🟢 10 Perfect-Approach1 (BLR-01A → COOLING-TWR-1)")
     print("  🟢  5 Perfect-Approach3 (EF-01B, RTU-06, VAV Box 510, AHU-PENTHOUSE + 1)")
-    print("  🟡  5 Partial matches   (40–69%)  → HTG-UNIT-3 through AIR-COMP-SHOP")
-    print("  🔵  3 LLM Reasoned      (HVAC-1, REFRIG-SYS-A, EMER-POWER-1) — needs LLM API key")
-    print("  🔴  5 No matches        (DECOMMISSIONED-007 through UNKNOWN-ASSET-ZZ)")
+    print("  🟢  2 Perfect-Approach2 (COOLING-CTRL-01, FCU-B2-L01) — NEW")
+    print("  🟡  5 Partial-Approach1 (HTG-UNIT-3 → AIR-COMP-SHOP)")
+    print("  🟡  2 Partial-Approach2 (PUMP-CND-2, BLDG-CTRL-02) — NEW")
+    print("  🔵  5 LLM Reasoned      (HVAC-1, REFRIG-SYS-A, EMER-POWER-1, STANDBY-GEN-A, CHILLR-B)")
+    print("  🔴  6 No matches        (DECOMMISSIONED-007 → UNKNOWN-ASSET-ZZ, XFMR-MAIN-480V)")
     return sfm_path, ifm_path
 
 

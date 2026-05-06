@@ -38,16 +38,16 @@ A Gen-AI engineering platform with two connected pipelines:
 ```
 smartfm-mapping/
 │
-├── app.py                          ← Streamlit dashboard (5 tabs)
+├── app.py                          ← Streamlit dashboard (6 tabs)
 ├── requirements.txt                ← All pip dependencies
 ├── .env.example                    ← Template — copy to .env and fill keys
 │
 ├── pipeline/
 │   ├── __init__.py
-│   ├── langgraph_agent.py          ← 7-node LangGraph asset-matching graph
+│   ├── langgraph_agent.py          ← 8-node LangGraph asset-matching graph
 │   ├── matcher.py                  ← 5 fuzzy scoring functions (approach1–partial2)
 │   ├── sensor_ingestor.py          ← SensorEvent dataclass + SensorIngestor class
-│   ├── service_classifier.py       ← 4-tier classification engine (Perfect/Partial/LLM/NoMatch)
+│   ├── service_classifier.py       ← 4-tier classification engine (Perfect/Partial+LLM/LLM/NoMatch)
 │   ├── work_order_creator.py       ← IFM Hub API client + decide_action() logic
 │   ├── review_queue.py             ← SQLite human review queue
 │   ├── orchestrator.py             ← Wires all pipeline stages end-to-end
@@ -55,17 +55,19 @@ smartfm-mapping/
 │
 ├── llm/
 │   ├── __init__.py
-│   ├── chat_agent.py               ← LangChain ReAct chat agent (Tab 3)
+│   ├── chat_agent.py               ← LangChain ReAct chat agent (Tab 3) + direct LLM fallback
 │   ├── prompts.py                  ← All LLM system prompts
+│   ├── metrics_tracker.py          ← Singleton LLM usage tracker (all pipeline stages)
 │   └── service_classification_agent.py  ← LLM fallback for Tier 3 classification
 │
 └── data/
-    ├── service_catalog.json        ← 20 IFM service classifications
+    ├── service_catalog.json        ← 23 IFM service classifications (incl. 3 multi-asset)
+    ├── llm_metrics.jsonl           ← Append-only log of every LLM API call
     ├── pipeline_outcomes.jsonl     ← Append-only log of every pipeline run
     ├── review_queue.db             ← SQLite review queue (auto-created)
     ├── test/
-    │   ├── demo_results.csv        ← Pre-built demo output (28 rows, all 4 tiers)
-    │   ├── generate_test_data.py   ← Generates test_sfm_demo.xlsx + test_ifm_demo.xlsx
+    │   ├── demo_results.csv        ← Pre-built demo output (35 rows, all 8 match type variants)
+    │   ├── generate_test_data.py   ← Generates test_sfm_demo.xlsx (35 rows) + test_ifm_demo.xlsx (39 rows)
     │   └── make_demo_csv.py        ← Hardcodes demo_results.csv (no pipeline run needed)
     └── training/
         ├── sensor_training_data.csv/.jsonl/.json  ← 1200-row labeled dataset
@@ -76,15 +78,16 @@ smartfm-mapping/
 
 ---
 
-## 4. Streamlit Dashboard — 5 Tabs
+## 4. Streamlit Dashboard — 6 Tabs
 
 | Tab | Name | What it shows |
 |---|---|---|
 | 1 | Upload & Map | File upload → LangGraph pipeline → results table with colour-coded tiers |
-| 2 | Dashboard | KPI cards, Plotly pie chart (match type distribution), bar chart (building analysis) |
-| 3 | AI Chat | LangChain ReAct agent answering natural language questions about the data |
+| 2 | Dashboard | KPI cards, Plotly pie chart (match type distribution), histogram, building bar chart, lowest-confidence assets |
+| 3 | AI Chat | LangChain ReAct agent + direct GPT-5.5 fallback answering NL questions about the data |
 | 4 | Sensor Monitor | Demo sensor events, custom alert form, decision outcome KPIs, pie chart |
 | 5 | Review Queue | SQLite queue — Approve / Reject / Escalate buttons per pending item |
+| 6 | LLM Analytics | Real-time LLM call metrics: KPIs, by-model bar, by-purpose pie, by-pipeline bar, latency timeline, raw log |
 
 ### Conventions for adding a new tab
 1. Add to `st.tabs([...])` list in `app.py`
@@ -100,15 +103,17 @@ smartfm-mapping/
 ### Asset Mapping (LangGraph — `pipeline/langgraph_agent.py`)
 
 ```
-START → approach1 → approach2 → approach3 → partial1 → partial2 → llm_reason → finalize → END
-         ↓ stop early if match_found = True at any node
+START → approach1 → approach2 → approach3 → partial1 → partial2 → llm_verify_partial → llm_reason → finalize → END
+         ↓ stop early if match_found = True at any node (except partial1/partial2 → llm_verify_partial)
 ```
 
 - Each node calls a scorer from `matcher.py`
 - Scorers use `rapidfuzz.fuzz.token_set_ratio`
 - Thresholds: Perfect needs name ≥ 90, Partial needs name ≥ 50
-- LLM node sends top-5 candidates to GPT-5.5 and asks for a match decision
-- State object: `AssetMappingState` TypedDict
+- **`llm_verify_partial` node** (NEW): runs after partial1 and partial2 — GPT-5.5 confirms or rejects fuzzy partial match before marking it final; confirmed → `"<type> (LLM Verified)"`; rejected → forwards to `llm_reason`
+- **`llm_reason` node**: sends top-5 candidates to GPT-5.5 for final decision when no fuzzy match succeeded
+- State object: `AssetMappingState` TypedDict (includes `llm_verify_note: str` field)
+- Every LLM call records metrics via `llm/metrics_tracker.py`
 
 ### Sensor → Work Order (orchestrator — `pipeline/orchestrator.py`)
 

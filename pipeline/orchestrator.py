@@ -71,8 +71,14 @@ class SensorToWorkOrderPipeline:
         return self._handle_event(event)
 
     def process_batch(self, raw_events: List[dict]) -> List[dict]:
-        """Process multiple sensor events."""
-        return [self.process_raw_event(e) for e in raw_events]
+        """Process multiple sensor events with a small inter-event delay to avoid rate limiting."""
+        import time
+        results = []
+        for i, e in enumerate(raw_events):
+            results.append(self.process_raw_event(e))
+            if i < len(raw_events) - 1:
+                time.sleep(0.3)   # 300ms between events → ~3 req/s, well within Azure limits
+        return results
 
     def get_outcomes(self) -> List[dict]:
         return list(self._outcomes)

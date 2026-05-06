@@ -241,6 +241,45 @@
       "priority": "MEDIUM",
       "sla_hours": 8,
       "auto_create_threshold": 85
+    },
+    {
+      "id": "o448q5r2-7h18-208r-59m3-1242m723242r",
+      "name": "HVAC - Filter Change / Air Handler Maintenance",
+      "category": "HVAC",
+      "subcategory": "Maintenance",
+      "asset_types": ["AHU", "FCU", "MAU", "Thermostat", "Supply Fan", "HVAC Unit", "Air Handler", "ERU"],
+      "alert_types": ["filter_dirty", "airflow_low", "iaq_alert", "high_static_pressure", "setpoint_deviation", "co2_high"],
+      "keywords": ["filter", "air handler", "airflow", "static pressure", "maintenance", "IAQ", "dirty filter", "filter change"],
+      "priority": "LOW",
+      "sla_hours": 24,
+      "auto_create_threshold": 85,
+      "multi_asset_note": "Multiple asset types share this classification: AHU with filter_dirty, Thermostat with setpoint_deviation (caused by dirty filter reducing airflow), FCU with airflow_low all route to the same filter-change work order"
+    },
+    {
+      "id": "p559r6s3-8i29-219s-60n4-2353n834353s",
+      "name": "HVAC - Zone System Total Failure",
+      "category": "HVAC",
+      "subcategory": "Zone Failure",
+      "asset_types": ["AHU", "Thermostat", "VAV", "FCU", "DDC", "VAV Controller", "BAS Controller", "HVAC"],
+      "alert_types": ["zone_failure", "multi_zone_alarm", "system_shutdown", "cooling_failure", "heating_failure", "setpoint_deviation", "thermostat_fault", "controller_offline"],
+      "keywords": ["zone failure", "system down", "multi-zone", "complete failure", "shutdown", "HVAC zone", "zone alarm"],
+      "priority": "CRITICAL",
+      "sla_hours": 2,
+      "auto_create_threshold": 85,
+      "multi_asset_note": "AHU, VAV boxes, thermostats, and DDC controllers in the same zone can all alarm simultaneously for a single zone-level failure event — all route to the same work order"
+    },
+    {
+      "id": "q660s7t4-9j30-230t-71o5-3464o945464t",
+      "name": "Electrical - Critical Power Infrastructure Failure",
+      "category": "Electrical",
+      "subcategory": "Critical Power",
+      "asset_types": ["Generator", "UPS", "ATS", "Electrical Panel", "Emergency Panel", "Battery Backup", "PDU"],
+      "alert_types": ["generator_fault", "ups_fault", "power_failure", "battery_low", "load_transfer_fail", "ats_fault", "voltage_drop", "phase_loss"],
+      "keywords": ["critical power", "generator", "UPS", "ATS", "emergency power", "infrastructure", "power chain"],
+      "priority": "CRITICAL",
+      "sla_hours": 1,
+      "auto_create_threshold": 85,
+      "multi_asset_note": "Generator, UPS, ATS, and emergency panels can all alert simultaneously for a single critical power infrastructure failure — all route to the same emergency work order"
     }
   ]
 }

@@ -163,11 +163,22 @@ class ServiceClassifier:
                 event_id=event_id, asset_id=asset_id, location_id=location_id,
             )
 
-        # ── Tier 2: Partial (fuzzy) ────────────────────────────────────────────
+        # ── Tier 2: Partial (fuzzy) + LLM Verification ─────────────────────────────────
         if best_sc and best_score >= self.PARTIAL_THRESHOLD:
+            # Ask LLM to verify / potentially boost this partial match
+            if self.use_llm:
+                try:
+                    verified = self._llm_verify_partial(
+                        asset_type, alert_type, description,
+                        best_sc, best_score, event_id, asset_id, location_id,
+                    )
+                    if verified:
+                        return verified
+                except Exception as exc:
+                    logger.warning("LLM partial verify failed: %s — falling back to plain Partial", exc)
             return _build_result(
                 best_sc, best_score, "Partial Match",
-                reasoning=f"Fuzzy match at {best_score:.1f}% confidence. Human review recommended.",
+                reasoning=f"Fuzzy match at {best_score:.1f}%. Human review recommended.",
                 event_id=event_id, asset_id=asset_id, location_id=location_id,
             )
 
@@ -204,6 +215,93 @@ class ServiceClassifier:
         return [self.classify(e) for e in events]
 
     # ── LLM fallback ──────────────────────────────────────────────────────────
+
+    def _llm_verify_partial(
+        self,
+        asset_type: str,
+        alert_type: str,
+        description: str,
+        best_sc: dict,
+        best_score: float,
+        event_id: str,
+        asset_id: str,
+        location_id: str,
+    ) -> Optional[dict]:
+        """
+        Tier 2 LLM Verification: confirm or improve a fuzzy partial match.
+
+        Sends the top fuzzy match to GPT-5.5 and asks whether it is the
+        correct service classification.  The LLM can:
+          • Confirm  → returns result with match_type "Partial + LLM Verified"
+          • Reject   → returns None so Tier 3/4 can take over
+
+        Model: Azure OpenAI GPT-5.5
+        Metrics: recorded via llm.metrics_tracker (purpose=service_partial_verify)
+        """
+        from llm.metrics_tracker import record as _mt_record, Timer as _MtTimer
+
+        model = os.getenv("AZURE_OPENAI_DEPLOYMENT", "gpt-5.5_1")
+        endpoint  = os.getenv("AZURE_OPENAI_ENDPOINT", "").rstrip("/")
+        api_key   = os.getenv("AZURE_OPENAI_API_KEY", "")
+        api_ver   = os.getenv("AZURE_OPENAI_API_VERSION", "2024-12-01-preview")
+
+        if not endpoint or not api_key:
+            return None
+
+        # Compact prompt — remove whitespace/labels, truncate description
+        desc_short = (description or "")[:80]
+        prompt = (
+            f"Verify IFM service classification for sensor alert.\n"
+            f"Alert: asset={asset_type} type={alert_type} desc={desc_short}\n"
+            f"Fuzzy match ({best_score:.0f}%): {best_sc.get('name','')} "
+            f"({best_sc.get('category','')}/{best_sc.get('subcategory','')}) "
+            f"priority={best_sc.get('priority','')}\n"
+            f'Correct match? JSON only: {{"confirmed":true/false,'
+            f'"adjusted_confidence":<0-100>,"reasoning":"<1 sentence>"}}'
+        )
+
+        try:
+            from openai import AzureOpenAI
+            client = AzureOpenAI(azure_endpoint=endpoint, api_key=api_key, api_version=api_ver)
+
+            with _MtTimer() as _t:
+                resp = client.chat.completions.create(
+                    model=model,
+                    messages=[{"role": "user", "content": prompt}],
+                    max_completion_tokens=150,
+                    response_format={"type": "json_object"},
+                )
+            raw     = resp.choices[0].message.content
+            parsed  = json.loads(raw)
+            confirmed   = bool(parsed.get("confirmed", True))
+            new_conf    = float(parsed.get("adjusted_confidence", best_score))
+            reasoning   = parsed.get("reasoning", "LLM verified partial match.")
+
+            _mt_record(
+                model=model, purpose="service_partial_verify",
+                pipeline="sensor_pipeline", node="tier2_llm_verify",
+                success=True, latency_ms=_t.elapsed_ms,
+                tokens_in_est=len(prompt) // 4, tokens_out_est=len(raw) // 4,
+                extra={"confirmed": confirmed, "new_conf": new_conf},
+            )
+            logger.info(
+                "[LLM] Service partial verify → confirmed=%s conf=%.1f%% in %dms  model=%s",
+                confirmed, new_conf, _t.elapsed_ms, model,
+            )
+
+            if confirmed:
+                return _build_result(
+                    best_sc, new_conf, "Partial + LLM Verified",
+                    reasoning=reasoning,
+                    event_id=event_id, asset_id=asset_id, location_id=location_id,
+                )
+            return None   # rejected — let Tier 3 handle
+
+        except Exception as exc:
+            logger.warning("_llm_verify_partial error: %s", exc)
+            _mt_record(model=model, purpose="service_partial_verify",
+                       pipeline="sensor_pipeline", node="tier2_llm_verify", success=False)
+            return None
 
     def _llm_classify(
         self,

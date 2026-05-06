@@ -158,26 +158,33 @@ _PROMPT = PromptTemplate.from_template(_REACT_TEMPLATE)
 
 
 def _build_llm():
-    """Build LLM – tries Anthropic first, falls back to Azure OpenAI."""
-    anthropic_key = os.getenv("AZURE_OPENAI_API_KEY", "")  # reuse same key for demo
-    try:
-        import httpx
-        return ChatAnthropic(
-            model="claude-sonnet-4-6",
-            api_key=os.getenv("AZURE_OPENAI_API_KEY", ""),
-            base_url=os.getenv("ANTHROPIC_ENDPOINT",
-                               "https://admv-mogidbp0-eastus2.services.ai.azure.com/anthropic/"),
-            http_client=httpx.Client(verify=False),
-            max_tokens=2048,
-        )
-    except Exception:
-        return AzureChatOpenAI(
-            azure_deployment=os.getenv("AZURE_OPENAI_DEPLOYMENT", "gpt-5.5_1"),
-            api_version=os.getenv("AZURE_OPENAI_API_VERSION", "2024-12-01-preview"),
-            azure_endpoint=os.getenv("AZURE_OPENAI_ENDPOINT", ""),
-            api_key=os.getenv("AZURE_OPENAI_API_KEY", ""),
-            max_tokens=2048,
-        )
+    """
+    Build LLM for the chat/ReAct agent.
+    Routing strategy (token efficiency):
+      • Claude Sonnet 4.6 via AnthropicFoundry  — nuanced Q&A  (primary)
+      • GPT-5.5                                  — fallback if Claude creds missing/placeholder
+    """
+    anthropic_key      = os.getenv("AZURE_ANTHROPIC_API_KEY", "")
+    anthropic_endpoint = os.getenv("AZURE_ANTHROPIC_ENDPOINT",
+                                   "https://admv-mogidbp0-eastus2.services.ai.azure.com/anthropic/")
+    # Only try Claude if the key is actually set (not the placeholder)
+    if anthropic_key and not anthropic_key.startswith("<"):
+        try:
+            return ChatAnthropic(
+                model=os.getenv("AZURE_ANTHROPIC_DEPLOYMENT", "claude-sonnet-4-6"),
+                anthropic_api_key=anthropic_key,
+                anthropic_api_url=anthropic_endpoint,
+                max_tokens=1024,
+            )
+        except Exception:
+            pass  # fall through to GPT
+    return AzureChatOpenAI(
+        azure_deployment=os.getenv("AZURE_OPENAI_DEPLOYMENT", "gpt-5.5_1"),
+        api_version=os.getenv("AZURE_OPENAI_API_VERSION", "2024-12-01-preview"),
+        azure_endpoint=os.getenv("AZURE_OPENAI_ENDPOINT", ""),
+        api_key=os.getenv("AZURE_OPENAI_API_KEY", ""),
+        max_completion_tokens=1024,
+    )
 
 
 def get_chat_response(user_message: str, chat_history: list[dict]) -> str:
@@ -193,46 +200,130 @@ def get_chat_response(user_message: str, chat_history: list[dict]) -> str:
 
     try:
         llm = _build_llm()
+        # Detect which model is actually being used for accurate metrics
+        _model_name = (
+            os.getenv("AZURE_ANTHROPIC_DEPLOYMENT", "claude-sonnet-4-6")
+            if isinstance(llm, ChatAnthropic)
+            else os.getenv("AZURE_OPENAI_DEPLOYMENT", "gpt-5.5_1")
+        )
         agent = create_react_agent(llm, _TOOLS, _PROMPT)  # noqa: F821
         executor = AgentExecutor(  # noqa: F821
             agent=agent, tools=_TOOLS,
             verbose=False, handle_parsing_errors=True,
             max_iterations=5,
         )
-        result = executor.invoke({"input": user_message})
+        from llm.metrics_tracker import record as _mt_record, Timer as _MtTimer
+        with _MtTimer() as _t:
+            result = executor.invoke({"input": user_message})
+        _mt_record(
+            model=_model_name,
+            purpose="chat_agent", pipeline="chat", node="react_agent",
+            success=True, latency_ms=_t.elapsed_ms,
+            tokens_in_est=len(user_message) // 4,
+        )
         return result.get("output", "I could not generate a response.")
     except Exception:
         return _fallback_answer(user_message)
 
 
-def _fallback_answer(question: str) -> str:
-    """Simple keyword-based fallback when LLM is not available."""
+def _build_data_context() -> str:
+    """Build a text summary of the results DataFrame to send as LLM context."""
     if _results_df is None:
-        return "No data available."
+        return "No mapping data loaded."
     df = _results_df
-    q = question.lower()
+    counts  = df["match_type"].value_counts().to_dict()
+    avg_c   = round(df["confidence"].mean(), 1)
+    unmatched = df[df["match_type"] == "No Match"]["sfm_nav_name"].tolist()[:10]
+    low_conf  = df[df["confidence"].between(1, 50)].sort_values("confidence").head(5)[
+        ["sfm_nav_name", "confidence", "match_type"]
+    ].to_dict(orient="records")
+    return (
+        f"Total assets: {len(df)}\n"
+        f"Match distribution: {counts}\n"
+        f"Average confidence: {avg_c}%\n"
+        f"Unmatched assets (sample): {unmatched}\n"
+        f"Low-confidence assets: {low_conf}"
+    )
 
-    if "no match" in q or "unmatched" in q:
+
+def _fallback_answer(question: str) -> str:
+    """
+    Fallback when LangChain agent is unavailable.
+    Tries a direct Azure OpenAI GPT-5.5 call with data context first,
+    then falls back to keyword matching if the LLM is also unreachable.
+
+    Model: Azure OpenAI GPT-5.5
+    Metrics: recorded via llm.metrics_tracker (purpose=chat_direct)
+    """
+    from llm.metrics_tracker import record as _mt_record, Timer as _MtTimer
+
+    model = os.getenv("AZURE_OPENAI_DEPLOYMENT", "gpt-5.5_1")
+    data_ctx = _build_data_context()
+    prompt = (
+        f"You are a facility management data analyst. "
+        f"Here is the current SFM\u2194IFM asset mapping data:\n\n{data_ctx}\n\n"
+        f"Answer this question concisely using the data above:\n{question}"
+    )
+
+    try:
+        from openai import AzureOpenAI
+        client = AzureOpenAI(
+            api_key=os.getenv("AZURE_OPENAI_API_KEY", ""),
+            azure_endpoint=os.getenv("AZURE_OPENAI_ENDPOINT", ""),
+            api_version=os.getenv("AZURE_OPENAI_API_VERSION", "2024-12-01-preview"),
+        )
+        with _MtTimer() as _t:
+            resp = client.chat.completions.create(
+                model=model,
+                messages=[{"role": "user", "content": prompt}],
+                max_completion_tokens=512,
+            )
+        answer = resp.choices[0].message.content
+        _mt_record(
+            model=model, purpose="chat_direct", pipeline="chat",
+            node="fallback_llm", success=True, latency_ms=_t.elapsed_ms,
+            tokens_in_est=len(prompt) // 4, tokens_out_est=len(answer) // 4,
+        )
+        return answer
+    except Exception:
+        _mt_record(model=model, purpose="chat_direct", pipeline="chat",
+                   node="fallback_llm", success=False)
+        return _keyword_answer(question)
+
+
+def _keyword_answer(question: str) -> str:
+    """Last-resort keyword-based answer when all LLM paths are unavailable."""
+    if _results_df is None:
+        return "No data available. Please run the asset mapping first."
+    df = _results_df
+    q  = question.lower()
+
+    if any(w in q for w in ["no match", "unmatched", "not matched"]):
         unmatched = df[df["match_type"] == "No Match"]["sfm_nav_name"].tolist()
-        return f"**Unmatched assets ({len(unmatched)}):**\n" + "\n".join(f"- {a}" for a in unmatched)
+        return f"**{len(unmatched)} unmatched assets:**\n" + "\n".join(f"- {a}" for a in unmatched)
 
-    if "summary" in q or "overview" in q or "stats" in q:
+    if any(w in q for w in ["summary", "overview", "stats", "total", "how many"]):
         counts = df["match_type"].value_counts()
-        lines = [f"**Total assets:** {len(df)}"]
+        lines  = [f"**Total assets:** {len(df)}", f"**Avg confidence:** {round(df['confidence'].mean(),1)}%"]
         for k, v in counts.items():
-            pct = round(v / len(df) * 100, 1)
-            lines.append(f"- {k}: {v} ({pct}%)")
-        lines.append(f"**Average confidence:** {round(df['confidence'].mean(), 1)}%")
+            lines.append(f"- {k}: {v} ({round(v/len(df)*100,1)}%)")
         return "\n".join(lines)
 
-    if "low confidence" in q or "bad" in q or "problem" in q:
-        low = df[df["confidence"] < 50][["sfm_nav_name", "confidence", "match_type"]]
-        return f"**Low confidence assets (< 50%):**\n{low.to_string(index=False)}"
+    if any(w in q for w in ["low confidence", "bad", "problem", "below 50", "worst"]):
+        low = df[df["confidence"] < 50].sort_values("confidence").head(10)
+        return "**Low confidence assets (< 50%):**\n" + "\n".join(
+            f"- {r['sfm_nav_name']}: {r['confidence']}% ({r['match_type']})"
+            for _, r in low.iterrows()
+        )
+
+    if any(w in q for w in ["building", "site", "campus"]):
+        top = df["matched_building"].value_counts().head(5)
+        return "**Top buildings by asset count:**\n" + "\n".join(
+            f"- {b}: {c} assets" for b, c in top.items()
+        )
 
     return (
-        "I can answer questions like:\n"
-        "- Which assets have no match?\n"
-        "- Show me low confidence matches\n"
-        "- Give me a summary of mapping quality\n"
-        "- Which building has the most unmatched assets?"
+        f"I have {len(df)} asset mapping results loaded. "
+        "Ask me about: unmatched assets, low confidence scores, building analysis, match type distribution."
     )
+

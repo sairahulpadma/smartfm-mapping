@@ -20,26 +20,19 @@ logger = logging.getLogger(__name__)
 
 # ── LLM System prompt ─────────────────────────────────────────────────────────
 
-_SYSTEM_PROMPT = """You are an expert IFM (Integrated Facility Management) service classification specialist.
-
-Your task: given a building asset's type and its sensor alert, determine the BEST service classification
-from the provided candidates to route a work order to the correct IFM team.
-
-Rules:
-1. Pick ONLY from the provided candidate list (use the "id" field exactly).
-2. Assign a confidence score (0-100) reflecting how certain you are.
-3. Confidence 85+ means Perfect, 50-84 means Partial. Never return below 30.
-4. Provide a brief, precise reasoning (1-2 sentences).
-5. Return ONLY a valid JSON object with keys: chosen_id, confidence, reasoning.
-
-Example output:
-{"chosen_id": "4aa86b28-c506-11ed-afa1-0242ac120002", "confidence": 78, "reasoning": "AHU with temperature_high maps to HVAC cooling system failure. Partial confidence as no make/model context provided."}
-"""
+_SYSTEM_PROMPT = (
+    "IFM service classification specialist. "
+    "Pick the best service classification from the candidates. "
+    "Rules: use exact candidate id; confidence 85+=Perfect, 50-84=Partial, never <30; "
+    "1-2 sentence reasoning. "
+    'Output ONLY JSON: {"chosen_id":"...","confidence":0-100,"reasoning":"..."}'
+)
 
 # ── Catalog reference (loaded once) ──────────────────────────────────────────
 
 from pathlib import Path
 import json as _json
+from llm.metrics_tracker import record as _mt_record, Timer as _MtTimer
 
 _CATALOG: dict = {}
 _CATALOG_PATH = Path(__file__).parent.parent / "data" / "service_catalog.json"
@@ -89,26 +82,26 @@ def classify_with_llm(
         for c in candidates
     )
 
-    user_msg = f"""Asset Type: {asset_type}
-Alert Type: {alert_type.replace('_', ' ').title()}
-Description: {description}
+    # Truncate description to 80 chars to avoid padding tokens
+    desc_short = (description or "")[:80]
+    user_msg = (
+        f"Asset:{asset_type} Alert:{alert_type} Desc:{desc_short}\n"
+        f"Candidates:\n{candidate_text}\n"
+        f"Best match? JSON only."
+    )
 
-Top fuzzy-matched service classification candidates:
-{candidate_text}
-
-Which service classification ID best fits this alert? Return JSON only."""
-
+    _model = os.getenv("AZURE_OPENAI_DEPLOYMENT", "gpt-5.5_1")
     try:
-        response = client.chat.completions.create(
-            model=os.getenv("AZURE_OPENAI_DEPLOYMENT", "gpt-5.5_1"),
-            messages=[
-                {"role": "system", "content": _SYSTEM_PROMPT},
-                {"role": "user",   "content": user_msg},
-            ],
-            response_format={"type": "json_object"},
-            max_tokens=256,
-            temperature=0.1,
-        )
+        with _MtTimer() as _t:
+            response = client.chat.completions.create(
+                model=_model,
+                messages=[
+                    {"role": "system", "content": _SYSTEM_PROMPT},
+                    {"role": "user",   "content": user_msg},
+                ],
+                response_format={"type": "json_object"},
+                max_completion_tokens=256,
+            )
         raw = response.choices[0].message.content
         parsed = json.loads(raw)
         chosen_id  = parsed.get("chosen_id", "")
@@ -118,13 +111,31 @@ Which service classification ID best fits this alert? Return JSON only."""
         catalog = _get_catalog()
         sc = catalog.get(chosen_id)
         if sc:
+            # ── Record successful LLM call ─────────────────────────────────
+            _mt_record(
+                model=_model, purpose="service_classification",
+                pipeline="sensor_pipeline", node="tier3_llm_classify",
+                success=True, latency_ms=_t.elapsed_ms,
+                tokens_in_est=len(user_msg) // 4,
+                tokens_out_est=len(raw) // 4,
+                extra={"chosen_id": chosen_id, "confidence": confidence},
+            )
+            logger.info(
+                "[LLM] Service classification → %s (%.1f%%) in %dms  model=%s",
+                sc.get("name", chosen_id), confidence, _t.elapsed_ms, _model,
+            )
             return sc, confidence, reasoning
 
         logger.warning("LLM returned unknown id: %s", chosen_id)
+        _mt_record(model=_model, purpose="service_classification",
+                   pipeline="sensor_pipeline", node="tier3_llm_classify",
+                   success=False, latency_ms=_t.elapsed_ms)
         return None, 0.0, ""
 
     except Exception as exc:
         logger.error("LLM classify_with_llm failed: %s", exc)
+        _mt_record(model=_model, purpose="service_classification",
+                   pipeline="sensor_pipeline", node="tier3_llm_classify", success=False)
         return None, 0.0, ""
 
 
@@ -178,7 +189,6 @@ def build_classification_agent(results_df=None):
             api_key=api_key,
             azure_deployment=deployment,
             api_version=api_version,
-            temperature=0,
         )
 
         @tool
