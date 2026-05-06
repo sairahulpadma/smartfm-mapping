@@ -21,7 +21,7 @@
       "match_type": "Partial Match",
       "confidence": 54.7,
       "label": "Partial Match",
-      "timestamp": "2026-03-13T07:17:54.375331+00:00"
+      "timestamp": "2026-03-14T06:38:35.767751+00:00"
     },
     {
       "sensor_id": "SNS-SCADA-0001",
@@ -43,7 +43,7 @@
       "match_type": "Perfect Match",
       "confidence": 95.7,
       "label": "Perfect Match",
-      "timestamp": "2025-05-10T11:38:54.375358+00:00"
+      "timestamp": "2025-05-11T10:59:35.767780+00:00"
     },
     {
       "sensor_id": "SNS-BAS-CONTROLLER-0002",
@@ -65,7 +65,7 @@
       "match_type": "Perfect Match",
       "confidence": 86.5,
       "label": "Perfect Match",
-      "timestamp": "2025-10-23T01:42:54.375372+00:00"
+      "timestamp": "2025-10-24T01:03:35.767793+00:00"
     },
     {
       "sensor_id": "SNS-WATER-HEATER-0003",
@@ -87,16 +87,16 @@
       "match_type": "Perfect Match",
       "confidence": 94.4,
       "label": "Perfect Match",
-      "timestamp": "2025-10-31T10:52:54.375384+00:00"
+      "timestamp": "2025-11-01T10:13:35.767804+00:00"
     },
     {
-      "sensor_id": "SNS-BOOSTER-PUMP-0004",
-      "asset_id": "SFM-BOOSTER-PUMP-014",
-      "asset_name": "Booster Pump - Annex North LB1",
-      "asset_type": "Booster Pump",
-      "alert_type": "water_leak",
-      "reading_value": 8.5,
-      "reading_unit": "mm",
+      "sensor_id": "SNS-WATER-HEATER-0004",
+      "asset_id": "SFM-WATER-HEATER-014",
+      "asset_name": "Water Heater - Annex North LB1",
+      "asset_type": "Water Heater",
+      "alert_type": "flood_detection",
+      "reading_value": 85.1,
+      "reading_unit": "units",
       "threshold_min": null,
       "threshold_max": null,
       "building": "Office Park West",
@@ -109,14 +109,14 @@
       "match_type": "No Match",
       "confidence": 0.0,
       "label": "No Match",
-      "timestamp": "2026-02-10T17:42:54.375396+00:00"
+      "timestamp": "2026-02-11T17:03:35.767815+00:00"
     },
     {
-      "sensor_id": "SNS-SMOKE-DETECTOR-0005",
-      "asset_id": "SFM-SMOKE-DETECTOR-050",
-      "asset_name": "Smoke Detector - HQ Building A L1",
-      "asset_type": "Smoke Detector",
-      "alert_type": "bearing_fault",
+      "sensor_id": "SNS-COMPRESSOR-0005",
+      "asset_id": "SFM-COMPRESSOR-050",
+      "asset_name": "Compressor - HQ Building A L1",
+      "asset_type": "Compressor",
+      "alert_type": "setpoint_deviation",
       "reading_value": 93.3,
       "reading_unit": "units",
       "threshold_min": null,
@@ -131,7 +131,7 @@
       "match_type": "LLM Reasoned",
       "confidence": 76.5,
       "label": "LLM Reasoned",
-      "timestamp": "2026-01-12T07:44:54.375408+00:00"
+      "timestamp": "2026-01-13T07:05:35.767827+00:00"
     },
     {
       "sensor_id": "SNS-SUPPLY-FAN-0006",
@@ -153,14 +153,14 @@
       "match_type": "LLM Reasoned",
       "confidence": 77.2,
       "label": "LLM Reasoned",
-      "timestamp": "2026-01-16T08:33:54.375419+00:00"
+      "timestamp": "2026-01-17T07:54:35.767837+00:00"
     },
     {
-      "sensor_id": "SNS-ERU-0007",
-      "asset_id": "SFM-ERU-033",
-      "asset_name": "ERU - Parking Structure LB1",
-      "asset_type": "ERU",
-      "alert_type": "reader_offline",
+      "sensor_id": "SNS-MOTOR-0007",
+      "asset_id": "SFM-MOTOR-033",
+      "asset_name": "Motor - Parking Structure LB1",
+      "asset_type": "Motor",
+      "alert_type": "elevator_fault",
       "reading_value": 62.5,
       "reading_unit": "units",
       "threshold_min": null,
@@ -175,7 +175,7 @@
       "match_type": "No Match",
       "confidence": 0.0,
       "label": "No Match",
-      "timestamp": "2025-10-31T21:56:54.375432+00:00"
+      "timestamp": "2025-11-01T21:17:35.767847+00:00"
     },
     {
       "sensor_id": "SNS-CARD-READER-0008",
@@ -197,7 +197,7 @@
       "match_type": "Perfect Match",
       "confidence": 90.7,
       "label": "Perfect Match",
-      "timestamp": "2025-09-07T12:48:54.375443+00:00"
+      "timestamp": "2025-09-08T12:09:35.767857+00:00"
     },
     {
       "sensor_id": "SNS-EJECTOR-PUMP-0009",
@@ -219,7 +219,7 @@
       "match_type": "Perfect Match",
       "confidence": 95.8,
       "label": "Perfect Match",
-      "timestamp": "2025-12-21T12:16:54.375454+00:00"
+      "timestamp": "2025-12-22T11:37:35.767868+00:00"
     },
     {
       "sensor_id": "SNS-SUMP-PUMP-0010",
@@ -241,7 +241,7 @@
       "match_type": "Partial Match",
       "confidence": 76.5,
       "label": "Partial Match",
-      "timestamp": "2025-08-07T04:26:54.375465+00:00"
+      "timestamp": "2025-08-08T03:47:35.767877+00:00"
     },
     {
       "sensor_id": "SNS-SWITCHGEAR-0011",
@@ -263,7 +263,7 @@
       "match_type": "Partial Match",
       "confidence": 52.9,
       "label": "Partial Match",
-      "timestamp": "2025-08-30T02:16:54.375475+00:00"
+      "timestamp": "2025-08-31T01:37:35.767888+00:00"
     },
     {
       "sensor_id": "SNS-COMPRESSOR-0012",
@@ -285,7 +285,7 @@
       "match_type": "Perfect Match",
       "confidence": 93.1,
       "label": "Perfect Match",
-      "timestamp": "2025-05-16T22:19:54.375486+00:00"
+      "timestamp": "2025-05-17T21:40:35.767897+00:00"
     },
     {
       "sensor_id": "SNS-ELECTRICAL-PANEL-0013",
@@ -307,7 +307,7 @@
       "match_type": "Perfect Match",
       "confidence": 93.3,
       "label": "Perfect Match",
-      "timestamp": "2025-07-07T22:04:54.375497+00:00"
+      "timestamp": "2025-07-08T21:25:35.767907+00:00"
     },
     {
       "sensor_id": "SNS-SWITCHGEAR-0014",
@@ -329,7 +329,7 @@
       "match_type": "Perfect Match",
       "confidence": 93.1,
       "label": "Perfect Match",
-      "timestamp": "2025-07-16T10:34:54.375508+00:00"
+      "timestamp": "2025-07-17T09:55:35.767917+00:00"
     },
     {
       "sensor_id": "SNS-WATER-LEAK-SENSOR-0015",
@@ -351,7 +351,7 @@
       "match_type": "Perfect Match",
       "confidence": 95.9,
       "label": "Perfect Match",
-      "timestamp": "2025-05-25T08:23:54.375518+00:00"
+      "timestamp": "2025-05-26T07:44:35.767927+00:00"
     },
     {
       "sensor_id": "SNS-SMOKE-DETECTOR-0016",
@@ -373,14 +373,14 @@
       "match_type": "Perfect Match",
       "confidence": 89.2,
       "label": "Perfect Match",
-      "timestamp": "2025-12-29T02:36:54.375529+00:00"
+      "timestamp": "2025-12-30T01:57:35.767937+00:00"
     },
     {
-      "sensor_id": "SNS-FCU-0017",
-      "asset_id": "SFM-FCU-025",
-      "asset_name": "FCU - HQ Building A L4",
-      "asset_type": "FCU",
-      "alert_type": "fan_fault",
+      "sensor_id": "SNS-CARD-READER-0017",
+      "asset_id": "SFM-CARD-READER-025",
+      "asset_name": "Card Reader - HQ Building A L4",
+      "asset_type": "Card Reader",
+      "alert_type": "heating_failure",
       "reading_value": 29.2,
       "reading_unit": "units",
       "threshold_min": null,
@@ -395,7 +395,7 @@
       "match_type": "No Match",
       "confidence": 0.0,
       "label": "No Match",
-      "timestamp": "2025-10-12T03:54:54.375540+00:00"
+      "timestamp": "2025-10-13T03:15:35.767948+00:00"
     },
     {
       "sensor_id": "SNS-ENERGY-METER-0018",
@@ -417,7 +417,7 @@
       "match_type": "LLM Reasoned",
       "confidence": 77.2,
       "label": "LLM Reasoned",
-      "timestamp": "2026-02-14T22:46:54.375551+00:00"
+      "timestamp": "2026-02-15T22:07:35.767959+00:00"
     },
     {
       "sensor_id": "SNS-REFRIGERATION-SYSTEM-0019",
@@ -439,17 +439,17 @@
       "match_type": "Perfect Match",
       "confidence": 87.4,
       "label": "Perfect Match",
-      "timestamp": "2025-08-18T02:10:54.375561+00:00"
+      "timestamp": "2025-08-19T01:31:35.767969+00:00"
     },
     {
-      "sensor_id": "SNS-SCADA-0020",
-      "asset_id": "SFM-SCADA-037",
-      "asset_name": "SCADA - Retail Unit R1 L3",
-      "asset_type": "SCADA",
-      "alert_type": "freezer_temp_high",
-      "reading_value": 17.4,
-      "reading_unit": "\u00b0F",
-      "threshold_min": -20,
+      "sensor_id": "SNS-SWITCHGEAR-0020",
+      "asset_id": "SFM-SWITCHGEAR-037",
+      "asset_name": "Switchgear - Retail Unit R1 L3",
+      "asset_type": "Switchgear",
+      "alert_type": "fan_fault",
+      "reading_value": 65.7,
+      "reading_unit": "units",
+      "threshold_min": null,
       "threshold_max": null,
       "building": "Annex North",
       "floor": "1",
@@ -461,7 +461,7 @@
       "match_type": "No Match",
       "confidence": 0.0,
       "label": "No Match",
-      "timestamp": "2025-10-02T07:27:54.375572+00:00"
+      "timestamp": "2025-10-03T06:48:35.767979+00:00"
     },
     {
       "sensor_id": "SNS-BOOSTER-PUMP-0021",
@@ -483,7 +483,7 @@
       "match_type": "Perfect Match",
       "confidence": 91.9,
       "label": "Perfect Match",
-      "timestamp": "2026-03-29T04:35:54.375582+00:00"
+      "timestamp": "2026-03-30T03:56:35.767988+00:00"
     },
     {
       "sensor_id": "SNS-THERMOSTAT-0022",
@@ -505,7 +505,7 @@
       "match_type": "LLM Reasoned",
       "confidence": 81.1,
       "label": "LLM Reasoned",
-      "timestamp": "2025-10-27T19:54:54.375593+00:00"
+      "timestamp": "2025-10-28T19:15:35.768001+00:00"
     },
     {
       "sensor_id": "SNS-ELEVATOR-0023",
@@ -527,7 +527,7 @@
       "match_type": "Perfect Match",
       "confidence": 99.1,
       "label": "Perfect Match",
-      "timestamp": "2026-02-25T20:57:54.375603+00:00"
+      "timestamp": "2026-02-26T20:18:35.768012+00:00"
     },
     {
       "sensor_id": "SNS-ATS-0024",
@@ -549,7 +549,7 @@
       "match_type": "Perfect Match",
       "confidence": 89.0,
       "label": "Perfect Match",
-      "timestamp": "2025-08-27T20:07:54.375614+00:00"
+      "timestamp": "2025-08-28T19:28:35.768021+00:00"
     },
     {
       "sensor_id": "SNS-THERMOSTAT-0025",
@@ -571,7 +571,7 @@
       "match_type": "Perfect Match",
       "confidence": 96.1,
       "label": "Perfect Match",
-      "timestamp": "2025-07-26T06:37:54.375624+00:00"
+      "timestamp": "2025-07-27T05:58:35.768031+00:00"
     },
     {
       "sensor_id": "SNS-SUMP-PUMP-0026",
@@ -593,14 +593,14 @@
       "match_type": "Perfect Match",
       "confidence": 86.9,
       "label": "Perfect Match",
-      "timestamp": "2025-11-28T17:07:54.375634+00:00"
+      "timestamp": "2025-11-29T16:28:35.768041+00:00"
     },
     {
-      "sensor_id": "SNS-FIRE-ALARM-PANEL-0027",
-      "asset_id": "SFM-FIRE-ALARM-PANEL-027",
-      "asset_name": "Fire Alarm Panel - HQ Building A LG",
-      "asset_type": "Fire Alarm Panel",
-      "alert_type": "sensor_drift",
+      "sensor_id": "SNS-AHU-0027",
+      "asset_id": "SFM-AHU-027",
+      "asset_name": "AHU - HQ Building A LG",
+      "asset_type": "AHU",
+      "alert_type": "low_flow",
       "reading_value": 31.3,
       "reading_unit": "units",
       "threshold_min": null,
@@ -615,7 +615,7 @@
       "match_type": "No Match",
       "confidence": 0.0,
       "label": "No Match",
-      "timestamp": "2026-02-10T23:08:54.375645+00:00"
+      "timestamp": "2026-02-11T22:29:35.768052+00:00"
     },
     {
       "sensor_id": "SNS-CCTV-CAMERA-0028",
@@ -637,7 +637,7 @@
       "match_type": "Perfect Match",
       "confidence": 97.9,
       "label": "Perfect Match",
-      "timestamp": "2026-01-11T22:12:54.375656+00:00"
+      "timestamp": "2026-01-12T21:33:35.768061+00:00"
     },
     {
       "sensor_id": "SNS-BOOSTER-PUMP-0029",
@@ -659,13 +659,13 @@
       "match_type": "Perfect Match",
       "confidence": 99.5,
       "label": "Perfect Match",
-      "timestamp": "2025-12-13T17:23:54.375666+00:00"
+      "timestamp": "2025-12-14T16:44:35.768071+00:00"
     },
     {
-      "sensor_id": "SNS-AC-UNIT-0030",
-      "asset_id": "SFM-AC-UNIT-023",
-      "asset_name": "AC Unit - Warehouse East L4",
-      "asset_type": "AC Unit",
+      "sensor_id": "SNS-CRAC-0030",
+      "asset_id": "SFM-CRAC-023",
+      "asset_name": "CRAC - Warehouse East L4",
+      "asset_type": "CRAC",
       "alert_type": "breaker_trip",
       "reading_value": 33.9,
       "reading_unit": "units",
@@ -681,7 +681,7 @@
       "match_type": "No Match",
       "confidence": 0.0,
       "label": "No Match",
-      "timestamp": "2026-03-10T09:37:54.375676+00:00"
+      "timestamp": "2026-03-11T08:58:35.768080+00:00"
     },
     {
       "sensor_id": "SNS-ESCALATOR-0031",
@@ -703,7 +703,7 @@
       "match_type": "Perfect Match",
       "confidence": 91.5,
       "label": "Perfect Match",
-      "timestamp": "2025-08-11T11:21:54.375686+00:00"
+      "timestamp": "2025-08-12T10:42:35.768090+00:00"
     },
     {
       "sensor_id": "SNS-ACCESS-CONTROL-PANEL-0032",
@@ -725,7 +725,7 @@
       "match_type": "Partial Match",
       "confidence": 60.2,
       "label": "Partial Match",
-      "timestamp": "2025-11-27T07:38:54.375698+00:00"
+      "timestamp": "2025-11-28T06:59:35.768100+00:00"
     },
     {
       "sensor_id": "SNS-WATER-HEATER-0033",
@@ -747,7 +747,7 @@
       "match_type": "Partial Match",
       "confidence": 70.9,
       "label": "Partial Match",
-      "timestamp": "2025-12-01T16:29:54.375709+00:00"
+      "timestamp": "2025-12-02T15:50:35.768109+00:00"
     },
     {
       "sensor_id": "SNS-UPS-0034",
@@ -769,18 +769,18 @@
       "match_type": "Perfect Match",
       "confidence": 88.2,
       "label": "Perfect Match",
-      "timestamp": "2025-09-04T05:54:54.375719+00:00"
+      "timestamp": "2025-09-05T05:15:35.768118+00:00"
     },
     {
-      "sensor_id": "SNS-FCU-0035",
-      "asset_id": "SFM-FCU-050",
-      "asset_name": "FCU - HQ Building B L5",
-      "asset_type": "FCU",
-      "alert_type": "energy_spike",
-      "reading_value": 639.4,
-      "reading_unit": "kW",
+      "sensor_id": "SNS-CARD-READER-0035",
+      "asset_id": "SFM-CARD-READER-050",
+      "asset_name": "Card Reader - HQ Building B L5",
+      "asset_type": "Card Reader",
+      "alert_type": "lighting_failure",
+      "reading_value": 27.9,
+      "reading_unit": "units",
       "threshold_min": null,
-      "threshold_max": 400,
+      "threshold_max": null,
       "building": "Data Center",
       "floor": "1",
       "room": "Lobby",
@@ -791,7 +791,7 @@
       "match_type": "LLM Reasoned",
       "confidence": 60.6,
       "label": "LLM Reasoned",
-      "timestamp": "2025-12-30T13:25:54.375730+00:00"
+      "timestamp": "2025-12-31T12:46:35.768129+00:00"
     },
     {
       "sensor_id": "SNS-SWITCHGEAR-0036",
@@ -813,14 +813,14 @@
       "match_type": "Perfect Match",
       "confidence": 98.4,
       "label": "Perfect Match",
-      "timestamp": "2026-03-11T15:50:54.375740+00:00"
+      "timestamp": "2026-03-12T15:11:35.768138+00:00"
     },
     {
-      "sensor_id": "SNS-ATS-0037",
-      "asset_id": "SFM-ATS-049",
-      "asset_name": "ATS - Parking Structure LRoof",
-      "asset_type": "ATS",
-      "alert_type": "bearing_fault",
+      "sensor_id": "SNS-EJECTOR-PUMP-0037",
+      "asset_id": "SFM-EJECTOR-PUMP-049",
+      "asset_name": "Ejector Pump - Parking Structure LRoof",
+      "asset_type": "Ejector Pump",
+      "alert_type": "setpoint_deviation",
       "reading_value": 70.1,
       "reading_unit": "units",
       "threshold_min": null,
@@ -835,14 +835,14 @@
       "match_type": "No Match",
       "confidence": 0.0,
       "label": "No Match",
-      "timestamp": "2025-07-22T09:44:54.375751+00:00"
+      "timestamp": "2025-07-23T09:05:35.768148+00:00"
     },
     {
-      "sensor_id": "SNS-SUMP-PUMP-0038",
-      "asset_id": "SFM-SUMP-PUMP-041",
-      "asset_name": "Sump Pump - Tower 2 L2",
-      "asset_type": "Sump Pump",
-      "alert_type": "lighting_failure",
+      "sensor_id": "SNS-COOLING-TOWER-0038",
+      "asset_id": "SFM-COOLING-TOWER-041",
+      "asset_name": "Cooling Tower - Tower 2 L2",
+      "asset_type": "Cooling Tower",
+      "alert_type": "high_consumption",
       "reading_value": 85.6,
       "reading_unit": "units",
       "threshold_min": null,
@@ -857,7 +857,7 @@
       "match_type": "No Match",
       "confidence": 0.0,
       "label": "No Match",
-      "timestamp": "2025-12-14T12:33:54.375762+00:00"
+      "timestamp": "2025-12-15T11:54:35.768158+00:00"
     },
     {
       "sensor_id": "SNS-ATS-0039",
@@ -879,7 +879,7 @@
       "match_type": "Perfect Match",
       "confidence": 87.1,
       "label": "Perfect Match",
-      "timestamp": "2026-01-06T16:20:54.375772+00:00"
+      "timestamp": "2026-01-07T15:41:35.768167+00:00"
     },
     {
       "sensor_id": "SNS-SEWAGE-PUMP-0040",
@@ -901,7 +901,7 @@
       "match_type": "Perfect Match",
       "confidence": 90.8,
       "label": "Perfect Match",
-      "timestamp": "2025-07-09T07:03:54.375782+00:00"
+      "timestamp": "2025-07-10T06:24:35.768177+00:00"
     },
     {
       "sensor_id": "SNS-WATER-HEATER-0041",
@@ -923,7 +923,7 @@
       "match_type": "Partial Match",
       "confidence": 64.2,
       "label": "Partial Match",
-      "timestamp": "2025-07-29T09:07:54.375792+00:00"
+      "timestamp": "2025-07-30T08:28:35.768186+00:00"
     },
     {
       "sensor_id": "SNS-ATS-0042",
@@ -945,7 +945,7 @@
       "match_type": "Partial Match",
       "confidence": 74.6,
       "label": "Partial Match",
-      "timestamp": "2025-09-08T00:25:54.375802+00:00"
+      "timestamp": "2025-09-08T23:46:35.768196+00:00"
     },
     {
       "sensor_id": "SNS-THERMOSTAT-0043",
@@ -967,14 +967,14 @@
       "match_type": "Partial Match",
       "confidence": 58.8,
       "label": "Partial Match",
-      "timestamp": "2025-11-18T22:35:54.375812+00:00"
+      "timestamp": "2025-11-19T21:56:35.768206+00:00"
     },
     {
-      "sensor_id": "SNS-SUMP-PUMP-0044",
-      "asset_id": "SFM-SUMP-PUMP-049",
-      "asset_name": "Sump Pump - HQ Building A L1",
-      "asset_type": "Sump Pump",
-      "alert_type": "hot_water_failure",
+      "sensor_id": "SNS-COOLING-TOWER-0044",
+      "asset_id": "SFM-COOLING-TOWER-049",
+      "asset_name": "Cooling Tower - HQ Building A L1",
+      "asset_type": "Cooling Tower",
+      "alert_type": "compressor_fault",
       "reading_value": 95.7,
       "reading_unit": "units",
       "threshold_min": null,
@@ -989,7 +989,7 @@
       "match_type": "LLM Reasoned",
       "confidence": 65.4,
       "label": "LLM Reasoned",
-      "timestamp": "2026-03-30T09:02:54.375823+00:00"
+      "timestamp": "2026-03-31T08:23:35.768216+00:00"
     },
     {
       "sensor_id": "SNS-THERMOSTAT-0045",
@@ -1011,18 +1011,18 @@
       "match_type": "Perfect Match",
       "confidence": 99.2,
       "label": "Perfect Match",
-      "timestamp": "2025-09-08T06:48:54.375833+00:00"
+      "timestamp": "2025-09-09T06:09:35.768226+00:00"
     },
     {
-      "sensor_id": "SNS-BOOSTER-PUMP-0046",
-      "asset_id": "SFM-BOOSTER-PUMP-013",
-      "asset_name": "Booster Pump - HQ Building B L1",
-      "asset_type": "Booster Pump",
-      "alert_type": "high_consumption",
-      "reading_value": 61.8,
-      "reading_unit": "units",
-      "threshold_min": null,
-      "threshold_max": null,
+      "sensor_id": "SNS-WATER-HEATER-0046",
+      "asset_id": "SFM-WATER-HEATER-013",
+      "asset_name": "Water Heater - HQ Building B L1",
+      "asset_type": "Water Heater",
+      "alert_type": "voltage_drop",
+      "reading_value": 197.3,
+      "reading_unit": "V",
+      "threshold_min": 210,
+      "threshold_max": 240,
       "building": "HQ Building B",
       "floor": "2",
       "room": "Stairwell",
@@ -1033,14 +1033,14 @@
       "match_type": "No Match",
       "confidence": 0.0,
       "label": "No Match",
-      "timestamp": "2025-10-24T16:19:54.375844+00:00"
+      "timestamp": "2025-10-25T15:40:35.768236+00:00"
     },
     {
-      "sensor_id": "SNS-SCADA-0047",
-      "asset_id": "SFM-SCADA-022",
-      "asset_name": "SCADA - HQ Building A L4",
-      "asset_type": "SCADA",
-      "alert_type": "heating_failure",
+      "sensor_id": "SNS-SWITCHGEAR-0047",
+      "asset_id": "SFM-SWITCHGEAR-022",
+      "asset_name": "Switchgear - HQ Building A L4",
+      "asset_type": "Switchgear",
+      "alert_type": "reader_offline",
       "reading_value": 69.5,
       "reading_unit": "units",
       "threshold_min": null,
@@ -1055,14 +1055,14 @@
       "match_type": "No Match",
       "confidence": 0.0,
       "label": "No Match",
-      "timestamp": "2026-03-30T12:23:54.375854+00:00"
+      "timestamp": "2026-03-31T11:44:35.768248+00:00"
     },
     {
-      "sensor_id": "SNS-SUPPLY-FAN-0048",
-      "asset_id": "SFM-SUPPLY-FAN-035",
-      "asset_name": "Supply Fan - Parking Structure L5",
-      "asset_type": "Supply Fan",
-      "alert_type": "bearing_fault",
+      "sensor_id": "SNS-DDC-0048",
+      "asset_id": "SFM-DDC-035",
+      "asset_name": "DDC - Parking Structure L5",
+      "asset_type": "DDC",
+      "alert_type": "setpoint_deviation",
       "reading_value": 76.0,
       "reading_unit": "units",
       "threshold_min": null,
@@ -1077,18 +1077,18 @@
       "match_type": "No Match",
       "confidence": 0.0,
       "label": "No Match",
-      "timestamp": "2025-06-05T20:25:54.375865+00:00"
+      "timestamp": "2025-06-06T19:46:35.768258+00:00"
     },
     {
-      "sensor_id": "SNS-EJECTOR-PUMP-0049",
-      "asset_id": "SFM-EJECTOR-PUMP-032",
-      "asset_name": "Ejector Pump - Warehouse East LG",
-      "asset_type": "Ejector Pump",
-      "alert_type": "airflow_low",
-      "reading_value": 119.7,
-      "reading_unit": "CFM",
-      "threshold_min": 400,
-      "threshold_max": 600,
+      "sensor_id": "SNS-WATER-LEAK-SENSOR-0049",
+      "asset_id": "SFM-WATER-LEAK-SENSOR-032",
+      "asset_name": "Water Leak Sensor - Warehouse East LG",
+      "asset_type": "Water Leak Sensor",
+      "alert_type": "controls_failure",
+      "reading_value": 51.8,
+      "reading_unit": "units",
+      "threshold_min": null,
+      "threshold_max": null,
       "building": "Parking Structure",
       "floor": "1",
       "room": "Cafeteria",
@@ -1099,18 +1099,18 @@
       "match_type": "LLM Reasoned",
       "confidence": 74.6,
       "label": "LLM Reasoned",
-      "timestamp": "2025-10-22T19:03:54.375876+00:00"
+      "timestamp": "2025-10-23T18:24:35.768269+00:00"
     },
     {
-      "sensor_id": "SNS-CARD-READER-0050",
-      "asset_id": "SFM-CARD-READER-006",
-      "asset_name": "Card Reader - Tower 2 L4",
-      "asset_type": "Card Reader",
-      "alert_type": "airflow_low",
-      "reading_value": 91.4,
-      "reading_unit": "CFM",
-      "threshold_min": 400,
-      "threshold_max": 600,
+      "sensor_id": "SNS-REFRIGERATION-SYSTEM-0050",
+      "asset_id": "SFM-REFRIGERATION-SYSTEM-006",
+      "asset_name": "Refrigeration System - Tower 2 L4",
+      "asset_type": "Refrigeration System",
+      "alert_type": "controls_failure",
+      "reading_value": 34.9,
+      "reading_unit": "units",
+      "threshold_min": null,
+      "threshold_max": null,
       "building": "Parking Structure",
       "floor": "Roof",
       "room": "Server Room",
@@ -1121,7 +1121,7 @@
       "match_type": "No Match",
       "confidence": 0.0,
       "label": "No Match",
-      "timestamp": "2026-04-29T12:52:54.375886+00:00"
+      "timestamp": "2026-04-30T12:13:35.768279+00:00"
     },
     {
       "sensor_id": "SNS-HOT-WATER-PUMP-0051",
@@ -1143,7 +1143,7 @@
       "match_type": "Partial Match",
       "confidence": 50.6,
       "label": "Partial Match",
-      "timestamp": "2025-12-05T21:39:54.375896+00:00"
+      "timestamp": "2025-12-06T21:00:35.768288+00:00"
     },
     {
       "sensor_id": "SNS-WATER-LEAK-SENSOR-0052",
@@ -1165,7 +1165,7 @@
       "match_type": "Perfect Match",
       "confidence": 90.0,
       "label": "Perfect Match",
-      "timestamp": "2025-05-10T14:47:54.375906+00:00"
+      "timestamp": "2025-05-11T14:08:35.768298+00:00"
     },
     {
       "sensor_id": "SNS-SMOKE-DETECTOR-0053",
@@ -1187,7 +1187,7 @@
       "match_type": "LLM Reasoned",
       "confidence": 64.6,
       "label": "LLM Reasoned",
-      "timestamp": "2025-08-30T20:18:54.375917+00:00"
+      "timestamp": "2025-08-31T19:39:35.768308+00:00"
     },
     {
       "sensor_id": "SNS-AHU-0054",
@@ -1209,7 +1209,7 @@
       "match_type": "Perfect Match",
       "confidence": 86.9,
       "label": "Perfect Match",
-      "timestamp": "2026-04-12T03:29:54.375927+00:00"
+      "timestamp": "2026-04-13T02:50:35.768318+00:00"
     },
     {
       "sensor_id": "SNS-REFRIGERATION-SYSTEM-0055",
@@ -1231,7 +1231,7 @@
       "match_type": "Perfect Match",
       "confidence": 85.8,
       "label": "Perfect Match",
-      "timestamp": "2025-09-03T01:12:54.375937+00:00"
+      "timestamp": "2025-09-04T00:33:35.768327+00:00"
     },
     {
       "sensor_id": "SNS-ESCALATOR-0056",
@@ -1253,18 +1253,18 @@
       "match_type": "LLM Reasoned",
       "confidence": 66.0,
       "label": "LLM Reasoned",
-      "timestamp": "2025-07-23T15:26:54.375948+00:00"
+      "timestamp": "2025-07-24T14:47:35.768337+00:00"
     },
     {
-      "sensor_id": "SNS-THERMOSTAT-0057",
-      "asset_id": "SFM-THERMOSTAT-014",
-      "asset_name": "Thermostat - Annex North LB1",
-      "asset_type": "Thermostat",
-      "alert_type": "high_consumption",
-      "reading_value": 65.9,
-      "reading_unit": "units",
-      "threshold_min": null,
-      "threshold_max": null,
+      "sensor_id": "SNS-HOT-WATER-PUMP-0057",
+      "asset_id": "SFM-HOT-WATER-PUMP-014",
+      "asset_name": "Hot Water Pump - Annex North LB1",
+      "asset_type": "Hot Water Pump",
+      "alert_type": "voltage_drop",
+      "reading_value": 198.6,
+      "reading_unit": "V",
+      "threshold_min": 210,
+      "threshold_max": 240,
       "building": "Tower 1",
       "floor": "1",
       "room": "Plant Room",
@@ -1275,7 +1275,7 @@
       "match_type": "LLM Reasoned",
       "confidence": 74.6,
       "label": "LLM Reasoned",
-      "timestamp": "2026-03-15T22:24:54.375960+00:00"
+      "timestamp": "2026-03-16T21:45:35.768347+00:00"
     },
     {
       "sensor_id": "SNS-DDC-0058",
@@ -1297,18 +1297,18 @@
       "match_type": "Perfect Match",
       "confidence": 93.9,
       "label": "Perfect Match",
-      "timestamp": "2025-12-07T03:50:54.375971+00:00"
+      "timestamp": "2025-12-08T03:11:35.768357+00:00"
     },
     {
-      "sensor_id": "SNS-SUPPLY-FAN-0059",
-      "asset_id": "SFM-SUPPLY-FAN-018",
-      "asset_name": "Supply Fan - Tower 1 LB1",
-      "asset_type": "Supply Fan",
-      "alert_type": "high_consumption",
-      "reading_value": 59.0,
-      "reading_unit": "units",
-      "threshold_min": null,
-      "threshold_max": null,
+      "sensor_id": "SNS-DDC-0059",
+      "asset_id": "SFM-DDC-018",
+      "asset_name": "DDC - Tower 1 LB1",
+      "asset_type": "DDC",
+      "alert_type": "voltage_drop",
+      "reading_value": 196.3,
+      "reading_unit": "V",
+      "threshold_min": 210,
+      "threshold_max": 240,
       "building": "HQ Building A",
       "floor": "G",
       "room": "Office Area",
@@ -1319,7 +1319,7 @@
       "match_type": "No Match",
       "confidence": 0.0,
       "label": "No Match",
-      "timestamp": "2025-06-08T00:06:54.375981+00:00"
+      "timestamp": "2025-06-08T23:27:35.768367+00:00"
     },
     {
       "sensor_id": "SNS-ESCALATOR-0060",
@@ -1341,7 +1341,7 @@
       "match_type": "LLM Reasoned",
       "confidence": 71.2,
       "label": "LLM Reasoned",
-      "timestamp": "2025-11-30T06:39:54.375992+00:00"
+      "timestamp": "2025-12-01T06:00:35.768376+00:00"
     },
     {
       "sensor_id": "SNS-EJECTOR-PUMP-0061",
@@ -1363,7 +1363,7 @@
       "match_type": "Partial Match",
       "confidence": 50.9,
       "label": "Partial Match",
-      "timestamp": "2026-01-07T07:11:54.376002+00:00"
+      "timestamp": "2026-01-08T06:32:35.768386+00:00"
     },
     {
       "sensor_id": "SNS-HOT-WATER-PUMP-0062",
@@ -1385,7 +1385,7 @@
       "match_type": "Perfect Match",
       "confidence": 100.0,
       "label": "Perfect Match",
-      "timestamp": "2025-09-23T08:12:54.376012+00:00"
+      "timestamp": "2025-09-24T07:33:35.768395+00:00"
     },
     {
       "sensor_id": "SNS-BOILER-0063",
@@ -1407,7 +1407,7 @@
       "match_type": "Partial Match",
       "confidence": 73.6,
       "label": "Partial Match",
-      "timestamp": "2025-12-08T07:39:54.376022+00:00"
+      "timestamp": "2025-12-09T07:00:35.768405+00:00"
     },
     {
       "sensor_id": "SNS-HEAT-PUMP-0064",
@@ -1429,7 +1429,7 @@
       "match_type": "LLM Reasoned",
       "confidence": 72.4,
       "label": "LLM Reasoned",
-      "timestamp": "2026-05-04T07:09:54.376032+00:00"
+      "timestamp": "2026-05-05T06:30:35.768414+00:00"
     },
     {
       "sensor_id": "SNS-COOLING-TOWER-0065",
@@ -1451,73 +1451,73 @@
       "match_type": "Perfect Match",
       "confidence": 85.8,
       "label": "Perfect Match",
-      "timestamp": "2025-12-19T11:56:54.376042+00:00"
+      "timestamp": "2025-12-20T11:17:35.768424+00:00"
     },
     {
-      "sensor_id": "SNS-COOLING-TOWER-0066",
-      "asset_id": "SFM-COOLING-TOWER-008",
-      "asset_name": "Cooling Tower - Tower 1 L5",
-      "asset_type": "Cooling Tower",
-      "alert_type": "fan_fault",
-      "reading_value": 11.2,
+      "sensor_id": "SNS-ATS-0066",
+      "asset_id": "SFM-ATS-008",
+      "asset_name": "ATS - Parking Structure LB1",
+      "asset_type": "ATS",
+      "alert_type": "heating_failure",
+      "reading_value": 59.7,
       "reading_unit": "units",
       "threshold_min": null,
       "threshold_max": null,
-      "building": "Annex North",
-      "floor": "Roof",
+      "building": "Tower 1",
+      "floor": "5",
       "room": "Office Area",
-      "service_classification_id": "n337p4l1-5o95-195p-37t0-9131t501919p",
-      "service_classification_name": "Cooling Tower - Maintenance",
-      "category": "Mechanical",
-      "priority": "MEDIUM",
+      "service_classification_id": null,
+      "service_classification_name": "No Match",
+      "category": null,
+      "priority": null,
+      "match_type": "No Match",
+      "confidence": 0.0,
+      "label": "No Match",
+      "timestamp": "2026-03-19T20:32:35.768433+00:00"
+    },
+    {
+      "sensor_id": "SNS-LIGHTING-PANEL-0067",
+      "asset_id": "SFM-LIGHTING-PANEL-025",
+      "asset_name": "Lighting Panel - Tower 2 LRoof",
+      "asset_type": "Lighting Panel",
+      "alert_type": "lighting_failure",
+      "reading_value": 53.4,
+      "reading_unit": "units",
+      "threshold_min": null,
+      "threshold_max": null,
+      "building": "Tower 1",
+      "floor": "B1",
+      "room": "Office Area",
+      "service_classification_id": "9ff3b07d-1a51-151b-f3f6-5797f167575b",
+      "service_classification_name": "Electrical - Lighting Issue",
+      "category": "Electrical",
+      "priority": "LOW",
       "match_type": "Perfect Match",
-      "confidence": 91.1,
+      "confidence": 92.1,
       "label": "Perfect Match",
-      "timestamp": "2026-01-10T01:35:54.376053+00:00"
+      "timestamp": "2025-09-14T11:16:35.768443+00:00"
     },
     {
-      "sensor_id": "SNS-REFRIGERATION-SYSTEM-0067",
-      "asset_id": "SFM-REFRIGERATION-SYSTEM-039",
-      "asset_name": "Refrigeration System - Retail Unit R1 LG",
-      "asset_type": "Refrigeration System",
-      "alert_type": "defrost_fault",
-      "reading_value": 31.9,
-      "reading_unit": "units",
-      "threshold_min": null,
-      "threshold_max": null,
-      "building": "HQ Building B",
-      "floor": "2",
-      "room": "Lobby",
-      "service_classification_id": "e448g5c2-6f06-106g-48k1-0242k612020g",
-      "service_classification_name": "Refrigeration - Temperature Variance",
-      "category": "Refrigeration",
-      "priority": "HIGH",
-      "match_type": "LLM Reasoned",
-      "confidence": 73.2,
-      "label": "LLM Reasoned",
-      "timestamp": "2025-10-20T22:06:54.376063+00:00"
-    },
-    {
-      "sensor_id": "SNS-SCADA-0068",
-      "asset_id": "SFM-SCADA-032",
-      "asset_name": "SCADA - Tower 1 L5",
-      "asset_type": "SCADA",
-      "alert_type": "communication_fault",
-      "reading_value": 10.2,
-      "reading_unit": "units",
-      "threshold_min": null,
-      "threshold_max": null,
+      "sensor_id": "SNS-AHU-0068",
+      "asset_id": "SFM-AHU-032",
+      "asset_name": "AHU - Tower 1 L5",
+      "asset_type": "AHU",
+      "alert_type": "fridge_temp_high",
+      "reading_value": 42.0,
+      "reading_unit": "\u00b0F",
+      "threshold_min": 32,
+      "threshold_max": 40,
       "building": "Retail Unit R1",
       "floor": "5",
       "room": "Cafeteria",
-      "service_classification_id": "f559h6d3-7g17-117h-59l2-1353l723131h",
-      "service_classification_name": "BMS/BAS - Control System Fault",
-      "category": "Building Automation",
+      "service_classification_id": "k004m1i8-2l62-162m-04q7-6808q278686m",
+      "service_classification_name": "Access Control - Door / Lock Fault",
+      "category": "Security",
       "priority": "HIGH",
-      "match_type": "Perfect Match",
-      "confidence": 95.9,
-      "label": "Perfect Match",
-      "timestamp": "2025-07-08T10:22:54.376074+00:00"
+      "match_type": "LLM Reasoned",
+      "confidence": 77.4,
+      "label": "LLM Reasoned",
+      "timestamp": "2025-07-09T09:43:35.768454+00:00"
     },
     {
       "sensor_id": "SNS-COOLING-TOWER-0069",
@@ -1539,16 +1539,16 @@
       "match_type": "Perfect Match",
       "confidence": 89.8,
       "label": "Perfect Match",
-      "timestamp": "2026-01-28T06:49:54.376084+00:00"
+      "timestamp": "2026-01-29T06:10:35.768463+00:00"
     },
     {
-      "sensor_id": "SNS-COOLING-TOWER-0070",
-      "asset_id": "SFM-COOLING-TOWER-003",
-      "asset_name": "Cooling Tower - Tower 1 LRoof",
-      "asset_type": "Cooling Tower",
-      "alert_type": "water_leak",
-      "reading_value": 8.1,
-      "reading_unit": "mm",
+      "sensor_id": "SNS-ATS-0070",
+      "asset_id": "SFM-ATS-003",
+      "asset_name": "ATS - Tower 1 LRoof",
+      "asset_type": "ATS",
+      "alert_type": "flood_detection",
+      "reading_value": 81.3,
+      "reading_unit": "units",
       "threshold_min": null,
       "threshold_max": null,
       "building": "Office Park West",
@@ -1561,18 +1561,18 @@
       "match_type": "No Match",
       "confidence": 0.0,
       "label": "No Match",
-      "timestamp": "2025-06-06T00:33:54.376094+00:00"
+      "timestamp": "2025-06-06T23:54:35.768473+00:00"
     },
     {
-      "sensor_id": "SNS-GENERATOR-0071",
-      "asset_id": "SFM-GENERATOR-042",
-      "asset_name": "Generator - Tower 1 LB1",
-      "asset_type": "Generator",
-      "alert_type": "water_level_low",
-      "reading_value": 11.4,
-      "reading_unit": "units",
+      "sensor_id": "SNS-ACCESS-CONTROL-PANEL-0071",
+      "asset_id": "SFM-ACCESS-CONTROL-PANEL-042",
+      "asset_name": "Access Control Panel - Tower 1 LB1",
+      "asset_type": "Access Control Panel",
+      "alert_type": "energy_spike",
+      "reading_value": 510.7,
+      "reading_unit": "kW",
       "threshold_min": null,
-      "threshold_max": null,
+      "threshold_max": 400,
       "building": "Parking Structure",
       "floor": "2",
       "room": "Cafeteria",
@@ -1583,7 +1583,7 @@
       "match_type": "No Match",
       "confidence": 0.0,
       "label": "No Match",
-      "timestamp": "2026-02-20T15:09:54.376104+00:00"
+      "timestamp": "2026-02-21T14:30:35.768483+00:00"
     },
     {
       "sensor_id": "SNS-BOOSTER-PUMP-0072",
@@ -1605,7 +1605,7 @@
       "match_type": "Perfect Match",
       "confidence": 97.8,
       "label": "Perfect Match",
-      "timestamp": "2025-08-04T16:44:54.376114+00:00"
+      "timestamp": "2025-08-05T16:05:35.768494+00:00"
     },
     {
       "sensor_id": "SNS-EMERGENCY-LIGHTING-0073",
@@ -1627,7 +1627,7 @@
       "match_type": "LLM Reasoned",
       "confidence": 70.4,
       "label": "LLM Reasoned",
-      "timestamp": "2026-03-15T08:19:54.376124+00:00"
+      "timestamp": "2026-03-16T07:40:35.768504+00:00"
     },
     {
       "sensor_id": "SNS-CRAC-0074",
@@ -1649,18 +1649,18 @@
       "match_type": "Perfect Match",
       "confidence": 87.2,
       "label": "Perfect Match",
-      "timestamp": "2025-08-06T15:28:54.376135+00:00"
+      "timestamp": "2025-08-07T14:49:35.768517+00:00"
     },
     {
-      "sensor_id": "SNS-CHILLED-WATER-PUMP-0075",
-      "asset_id": "SFM-CHILLED-WATER-PUMP-017",
-      "asset_name": "Chilled Water Pump - Parking Structure L2",
-      "asset_type": "Chilled Water Pump",
-      "alert_type": "energy_spike",
-      "reading_value": 908.2,
-      "reading_unit": "kW",
+      "sensor_id": "SNS-GENERATOR-0075",
+      "asset_id": "SFM-GENERATOR-017",
+      "asset_name": "Generator - Parking Structure L2",
+      "asset_type": "Generator",
+      "alert_type": "lighting_failure",
+      "reading_value": 62.5,
+      "reading_unit": "units",
       "threshold_min": null,
-      "threshold_max": 400,
+      "threshold_max": null,
       "building": "HQ Building A",
       "floor": "5",
       "room": "Office Area",
@@ -1671,7 +1671,7 @@
       "match_type": "No Match",
       "confidence": 0.0,
       "label": "No Match",
-      "timestamp": "2026-01-06T14:24:54.376147+00:00"
+      "timestamp": "2026-01-07T13:45:35.768527+00:00"
     },
     {
       "sensor_id": "SNS-DDC-0076",
@@ -1693,17 +1693,17 @@
       "match_type": "Perfect Match",
       "confidence": 99.8,
       "label": "Perfect Match",
-      "timestamp": "2025-12-02T08:37:54.376157+00:00"
+      "timestamp": "2025-12-03T07:58:35.768537+00:00"
     },
     {
-      "sensor_id": "SNS-BOOSTER-PUMP-0077",
-      "asset_id": "SFM-BOOSTER-PUMP-043",
-      "asset_name": "Booster Pump - Data Center L2",
-      "asset_type": "Booster Pump",
-      "alert_type": "freezer_temp_high",
-      "reading_value": 16.5,
-      "reading_unit": "\u00b0F",
-      "threshold_min": -20,
+      "sensor_id": "SNS-WATER-HEATER-0077",
+      "asset_id": "SFM-WATER-HEATER-043",
+      "asset_name": "Water Heater - Data Center L2",
+      "asset_type": "Water Heater",
+      "alert_type": "fan_fault",
+      "reading_value": 61.7,
+      "reading_unit": "units",
+      "threshold_min": null,
       "threshold_max": null,
       "building": "HQ Building A",
       "floor": "B2",
@@ -1715,18 +1715,18 @@
       "match_type": "No Match",
       "confidence": 0.0,
       "label": "No Match",
-      "timestamp": "2025-05-11T20:03:54.376168+00:00"
+      "timestamp": "2025-05-12T19:24:35.768547+00:00"
     },
     {
-      "sensor_id": "SNS-COMPRESSOR-0078",
-      "asset_id": "SFM-COMPRESSOR-044",
-      "asset_name": "Compressor - Tower 1 LB1",
-      "asset_type": "Compressor",
-      "alert_type": "heat_pump_fault",
-      "reading_value": 29.7,
-      "reading_unit": "units",
-      "threshold_min": null,
-      "threshold_max": null,
+      "sensor_id": "SNS-HEAT-PUMP-0078",
+      "asset_id": "SFM-HEAT-PUMP-044",
+      "asset_name": "Heat Pump - Tower 1 LB1",
+      "asset_type": "Heat Pump",
+      "alert_type": "pump_failure",
+      "reading_value": 4.4,
+      "reading_unit": "GPM",
+      "threshold_min": 50,
+      "threshold_max": 120,
       "building": "HQ Building A",
       "floor": "2",
       "room": "Parking",
@@ -1737,7 +1737,7 @@
       "match_type": "No Match",
       "confidence": 0.0,
       "label": "No Match",
-      "timestamp": "2026-01-27T09:48:54.376179+00:00"
+      "timestamp": "2026-01-28T09:09:35.768557+00:00"
     },
     {
       "sensor_id": "SNS-SUMP-PUMP-0079",
@@ -1759,18 +1759,18 @@
       "match_type": "Partial Match",
       "confidence": 60.0,
       "label": "Partial Match",
-      "timestamp": "2025-10-04T23:52:54.376189+00:00"
+      "timestamp": "2025-10-05T23:13:35.768567+00:00"
     },
     {
-      "sensor_id": "SNS-AC-UNIT-0080",
-      "asset_id": "SFM-AC-UNIT-010",
-      "asset_name": "AC Unit - Tower 2 L4",
-      "asset_type": "AC Unit",
-      "alert_type": "temperature_low",
-      "reading_value": 45.1,
-      "reading_unit": "\u00b0F",
-      "threshold_min": 65,
-      "threshold_max": 75,
+      "sensor_id": "SNS-CRAC-0080",
+      "asset_id": "SFM-CRAC-010",
+      "asset_name": "CRAC - Tower 2 L4",
+      "asset_type": "CRAC",
+      "alert_type": "power_failure",
+      "reading_value": 3.4,
+      "reading_unit": "V",
+      "threshold_min": 100,
+      "threshold_max": 250,
       "building": "Retail Unit R1",
       "floor": "3",
       "room": "Electrical Room",
@@ -1781,29 +1781,29 @@
       "match_type": "No Match",
       "confidence": 0.0,
       "label": "No Match",
-      "timestamp": "2026-03-07T15:00:54.376200+00:00"
+      "timestamp": "2026-03-08T14:21:35.768578+00:00"
     },
     {
-      "sensor_id": "SNS-BAS-CONTROLLER-0081",
-      "asset_id": "SFM-BAS-CONTROLLER-041",
-      "asset_name": "BAS Controller - Warehouse East LB1",
-      "asset_type": "BAS Controller",
-      "alert_type": "reader_offline",
-      "reading_value": 43.2,
+      "sensor_id": "SNS-ELEVATOR-0081",
+      "asset_id": "SFM-ELEVATOR-025",
+      "asset_name": "Elevator - Warehouse East LB1",
+      "asset_type": "Elevator",
+      "alert_type": "elevator_fault",
+      "reading_value": 50.9,
       "reading_unit": "units",
       "threshold_min": null,
       "threshold_max": null,
       "building": "Tower 2",
       "floor": "5",
       "room": "Mechanical Room",
-      "service_classification_id": "l115n2j9-3m73-173n-15r8-7919r389797n",
-      "service_classification_name": "CCTV / Surveillance - Camera Fault",
-      "category": "Security",
-      "priority": "MEDIUM",
-      "match_type": "LLM Reasoned",
-      "confidence": 78.0,
-      "label": "LLM Reasoned",
-      "timestamp": "2025-12-21T10:40:54.376211+00:00"
+      "service_classification_id": "h771j8f5-9i39-139j-71n4-3575n945353j",
+      "service_classification_name": "Elevator / Vertical Transport",
+      "category": "Vertical Transport",
+      "priority": "CRITICAL",
+      "match_type": "Perfect Match",
+      "confidence": 95.1,
+      "label": "Perfect Match",
+      "timestamp": "2025-05-26T19:48:35.768588+00:00"
     },
     {
       "sensor_id": "SNS-ELEVATOR-0082",
@@ -1825,18 +1825,18 @@
       "match_type": "Perfect Match",
       "confidence": 94.7,
       "label": "Perfect Match",
-      "timestamp": "2025-06-13T14:06:54.376223+00:00"
+      "timestamp": "2025-06-14T13:27:35.768598+00:00"
     },
     {
-      "sensor_id": "SNS-THERMOSTAT-0083",
-      "asset_id": "SFM-THERMOSTAT-048",
-      "asset_name": "Thermostat - Retail Unit R1 L4",
-      "asset_type": "Thermostat",
-      "alert_type": "drainage_blockage",
-      "reading_value": 89.9,
-      "reading_unit": "units",
-      "threshold_min": null,
-      "threshold_max": null,
+      "sensor_id": "SNS-HOT-WATER-PUMP-0083",
+      "asset_id": "SFM-HOT-WATER-PUMP-048",
+      "asset_name": "Hot Water Pump - Retail Unit R1 L4",
+      "asset_type": "Hot Water Pump",
+      "alert_type": "airflow_low",
+      "reading_value": 183.1,
+      "reading_unit": "CFM",
+      "threshold_min": 400,
+      "threshold_max": 600,
       "building": "Office Park West",
       "floor": "G",
       "room": "Lobby",
@@ -1847,7 +1847,7 @@
       "match_type": "LLM Reasoned",
       "confidence": 63.3,
       "label": "LLM Reasoned",
-      "timestamp": "2025-09-14T17:22:54.376234+00:00"
+      "timestamp": "2025-09-15T16:43:35.768608+00:00"
     },
     {
       "sensor_id": "SNS-BMS-0084",
@@ -1869,7 +1869,7 @@
       "match_type": "Perfect Match",
       "confidence": 89.2,
       "label": "Perfect Match",
-      "timestamp": "2025-05-16T17:51:54.376244+00:00"
+      "timestamp": "2025-05-17T17:12:35.768617+00:00"
     },
     {
       "sensor_id": "SNS-HOT-WATER-PUMP-0085",
@@ -1891,14 +1891,14 @@
       "match_type": "Perfect Match",
       "confidence": 87.8,
       "label": "Perfect Match",
-      "timestamp": "2026-03-03T14:59:54.376254+00:00"
+      "timestamp": "2026-03-04T14:20:35.768627+00:00"
     },
     {
-      "sensor_id": "SNS-SCADA-0086",
-      "asset_id": "SFM-SCADA-015",
-      "asset_name": "SCADA - Warehouse East LG",
-      "asset_type": "SCADA",
-      "alert_type": "flood_detection",
+      "sensor_id": "SNS-SWITCHGEAR-0086",
+      "asset_id": "SFM-SWITCHGEAR-015",
+      "asset_name": "Switchgear - Warehouse East LG",
+      "asset_type": "Switchgear",
+      "alert_type": "hot_water_failure",
       "reading_value": 59.9,
       "reading_unit": "units",
       "threshold_min": null,
@@ -1913,29 +1913,29 @@
       "match_type": "No Match",
       "confidence": 0.0,
       "label": "No Match",
-      "timestamp": "2025-07-08T22:12:54.376265+00:00"
+      "timestamp": "2025-07-09T21:33:35.768637+00:00"
     },
     {
-      "sensor_id": "SNS-BOILER-0087",
-      "asset_id": "SFM-BOILER-023",
-      "asset_name": "Boiler - Tower 2 L3",
-      "asset_type": "Boiler",
-      "alert_type": "door_forced",
-      "reading_value": 25.7,
+      "sensor_id": "SNS-UPS-0087",
+      "asset_id": "SFM-UPS-023",
+      "asset_name": "UPS - Tower 2 L3",
+      "asset_type": "UPS",
+      "alert_type": "ups_fault",
+      "reading_value": 81.9,
       "reading_unit": "units",
       "threshold_min": null,
       "threshold_max": null,
       "building": "HQ Building A",
       "floor": "G",
       "room": "Office Area",
-      "service_classification_id": "l115n2j9-3m73-173n-15r8-7919r389797n",
-      "service_classification_name": "CCTV / Surveillance - Camera Fault",
-      "category": "Security",
-      "priority": "MEDIUM",
-      "match_type": "LLM Reasoned",
-      "confidence": 75.9,
-      "label": "LLM Reasoned",
-      "timestamp": "2026-04-22T01:04:54.376275+00:00"
+      "service_classification_id": "a004c18e-2b62-162c-04g7-6808g278686c",
+      "service_classification_name": "Electrical - Emergency Power",
+      "category": "Electrical",
+      "priority": "CRITICAL",
+      "match_type": "Perfect Match",
+      "confidence": 86.6,
+      "label": "Perfect Match",
+      "timestamp": "2026-04-23T00:25:35.768647+00:00"
     },
     {
       "sensor_id": "SNS-SUB-METER-0088",
@@ -1957,7 +1957,7 @@
       "match_type": "Perfect Match",
       "confidence": 86.0,
       "label": "Perfect Match",
-      "timestamp": "2025-09-17T17:32:54.376285+00:00"
+      "timestamp": "2025-09-18T16:53:35.768657+00:00"
     },
     {
       "sensor_id": "SNS-ACCESS-CONTROL-PANEL-0089",
@@ -1979,14 +1979,14 @@
       "match_type": "Perfect Match",
       "confidence": 99.5,
       "label": "Perfect Match",
-      "timestamp": "2026-04-03T13:10:54.376295+00:00"
+      "timestamp": "2026-04-04T12:31:35.768667+00:00"
     },
     {
-      "sensor_id": "SNS-NVR-0090",
-      "asset_id": "SFM-NVR-025",
-      "asset_name": "NVR - Office Park West LRoof",
-      "asset_type": "NVR",
-      "alert_type": "controller_offline",
+      "sensor_id": "SNS-CHILLED-WATER-PUMP-0090",
+      "asset_id": "SFM-CHILLED-WATER-PUMP-025",
+      "asset_name": "Chilled Water Pump - Office Park West LRoof",
+      "asset_type": "Chilled Water Pump",
+      "alert_type": "door_fault",
       "reading_value": 34.8,
       "reading_unit": "units",
       "threshold_min": null,
@@ -2001,7 +2001,7 @@
       "match_type": "LLM Reasoned",
       "confidence": 75.2,
       "label": "LLM Reasoned",
-      "timestamp": "2025-07-28T06:44:54.376306+00:00"
+      "timestamp": "2025-07-29T06:05:35.768678+00:00"
     },
     {
       "sensor_id": "SNS-BOILER-0091",
@@ -2023,14 +2023,14 @@
       "match_type": "Partial Match",
       "confidence": 72.3,
       "label": "Partial Match",
-      "timestamp": "2025-07-26T05:09:54.376316+00:00"
+      "timestamp": "2025-07-27T04:30:35.768688+00:00"
     },
     {
-      "sensor_id": "SNS-SWITCHGEAR-0092",
-      "asset_id": "SFM-SWITCHGEAR-031",
-      "asset_name": "Switchgear - HQ Building B LB1",
-      "asset_type": "Switchgear",
-      "alert_type": "setpoint_deviation",
+      "sensor_id": "SNS-ERU-0092",
+      "asset_id": "SFM-ERU-031",
+      "asset_name": "ERU - HQ Building B LB1",
+      "asset_type": "ERU",
+      "alert_type": "storage_full",
       "reading_value": 38.1,
       "reading_unit": "units",
       "threshold_min": null,
@@ -2045,7 +2045,7 @@
       "match_type": "LLM Reasoned",
       "confidence": 66.1,
       "label": "LLM Reasoned",
-      "timestamp": "2026-02-15T07:05:54.376327+00:00"
+      "timestamp": "2026-02-16T06:26:35.768700+00:00"
     },
     {
       "sensor_id": "SNS-SUB-METER-0093",
@@ -2067,16 +2067,16 @@
       "match_type": "Perfect Match",
       "confidence": 85.9,
       "label": "Perfect Match",
-      "timestamp": "2025-07-21T11:43:54.376337+00:00"
+      "timestamp": "2025-07-22T11:04:35.768710+00:00"
     },
     {
-      "sensor_id": "SNS-MCC-0094",
-      "asset_id": "SFM-MCC-007",
-      "asset_name": "MCC - Warehouse East LRoof",
-      "asset_type": "MCC",
-      "alert_type": "fire_alarm",
-      "reading_value": 55.7,
-      "reading_unit": "units",
+      "sensor_id": "SNS-SMOKE-DETECTOR-0094",
+      "asset_id": "SFM-SMOKE-DETECTOR-007",
+      "asset_name": "Smoke Detector - Warehouse East LRoof",
+      "asset_type": "Smoke Detector",
+      "alert_type": "water_leak",
+      "reading_value": 5.6,
+      "reading_unit": "mm",
       "threshold_min": null,
       "threshold_max": null,
       "building": "Warehouse East",
@@ -2089,7 +2089,7 @@
       "match_type": "LLM Reasoned",
       "confidence": 63.7,
       "label": "LLM Reasoned",
-      "timestamp": "2025-08-31T21:10:54.376348+00:00"
+      "timestamp": "2025-09-01T20:31:35.768720+00:00"
     },
     {
       "sensor_id": "SNS-EJECTOR-PUMP-0095",
@@ -2111,18 +2111,18 @@
       "match_type": "Partial Match",
       "confidence": 77.8,
       "label": "Partial Match",
-      "timestamp": "2025-06-24T07:23:54.376358+00:00"
+      "timestamp": "2025-06-25T06:44:35.768730+00:00"
     },
     {
-      "sensor_id": "SNS-THERMOSTAT-0096",
-      "asset_id": "SFM-THERMOSTAT-048",
-      "asset_name": "Thermostat - HQ Building A LB1",
-      "asset_type": "Thermostat",
-      "alert_type": "camera_offline",
-      "reading_value": 88.3,
-      "reading_unit": "units",
-      "threshold_min": null,
-      "threshold_max": null,
+      "sensor_id": "SNS-HOT-WATER-PUMP-0096",
+      "asset_id": "SFM-HOT-WATER-PUMP-048",
+      "asset_name": "Hot Water Pump - HQ Building A LB1",
+      "asset_type": "Hot Water Pump",
+      "alert_type": "fridge_temp_high",
+      "reading_value": 53.3,
+      "reading_unit": "\u00b0F",
+      "threshold_min": 32,
+      "threshold_max": 40,
       "building": "Retail Unit R1",
       "floor": "1",
       "room": "Lobby",
@@ -2133,7 +2133,7 @@
       "match_type": "LLM Reasoned",
       "confidence": 73.6,
       "label": "LLM Reasoned",
-      "timestamp": "2025-10-12T02:55:54.376369+00:00"
+      "timestamp": "2025-10-13T02:16:35.768740+00:00"
     },
     {
       "sensor_id": "SNS-ATS-0097",
@@ -2155,7 +2155,7 @@
       "match_type": "Perfect Match",
       "confidence": 89.9,
       "label": "Perfect Match",
-      "timestamp": "2025-07-18T09:59:54.376379+00:00"
+      "timestamp": "2025-07-19T09:20:35.768752+00:00"
     },
     {
       "sensor_id": "SNS-ACCESS-CONTROL-PANEL-0098",
@@ -2177,7 +2177,7 @@
       "match_type": "Perfect Match",
       "confidence": 91.2,
       "label": "Perfect Match",
-      "timestamp": "2026-01-14T12:57:54.376389+00:00"
+      "timestamp": "2026-01-15T12:18:35.768762+00:00"
     },
     {
       "sensor_id": "SNS-CHILLER-0099",
@@ -2199,7 +2199,7 @@
       "match_type": "Perfect Match",
       "confidence": 85.8,
       "label": "Perfect Match",
-      "timestamp": "2026-01-20T19:51:54.376399+00:00"
+      "timestamp": "2026-01-21T19:12:35.768773+00:00"
     },
     {
       "sensor_id": "SNS-SUB-METER-0100",
@@ -2221,7 +2221,7 @@
       "match_type": "Perfect Match",
       "confidence": 93.0,
       "label": "Perfect Match",
-      "timestamp": "2026-01-07T12:29:54.376408+00:00"
+      "timestamp": "2026-01-08T11:50:35.768783+00:00"
     },
     {
       "sensor_id": "SNS-AC-UNIT-0101",
@@ -2243,14 +2243,14 @@
       "match_type": "Partial Match",
       "confidence": 69.5,
       "label": "Partial Match",
-      "timestamp": "2025-05-06T08:38:54.376418+00:00"
+      "timestamp": "2025-05-07T07:59:35.768793+00:00"
     },
     {
-      "sensor_id": "SNS-CHILLED-WATER-PUMP-0102",
-      "asset_id": "SFM-CHILLED-WATER-PUMP-006",
-      "asset_name": "Chilled Water Pump - Data Center L2",
-      "asset_type": "Chilled Water Pump",
-      "alert_type": "bearing_fault",
+      "sensor_id": "SNS-GENERATOR-0102",
+      "asset_id": "SFM-GENERATOR-006",
+      "asset_name": "Generator - Data Center L2",
+      "asset_type": "Generator",
+      "alert_type": "setpoint_deviation",
       "reading_value": 86.0,
       "reading_unit": "units",
       "threshold_min": null,
@@ -2265,18 +2265,18 @@
       "match_type": "LLM Reasoned",
       "confidence": 65.8,
       "label": "LLM Reasoned",
-      "timestamp": "2025-07-07T16:31:54.376429+00:00"
+      "timestamp": "2025-07-08T15:52:35.768804+00:00"
     },
     {
-      "sensor_id": "SNS-CHILLER-0103",
-      "asset_id": "SFM-CHILLER-042",
-      "asset_name": "Chiller - Tower 1 L1",
-      "asset_type": "Chiller",
-      "alert_type": "ups_fault",
-      "reading_value": 27.5,
-      "reading_unit": "units",
+      "sensor_id": "SNS-THERMOSTAT-0103",
+      "asset_id": "SFM-THERMOSTAT-042",
+      "asset_name": "Thermostat - Tower 1 L1",
+      "asset_type": "Thermostat",
+      "alert_type": "co2_high",
+      "reading_value": 1016.3,
+      "reading_unit": "ppm",
       "threshold_min": null,
-      "threshold_max": null,
+      "threshold_max": 800,
       "building": "HQ Building B",
       "floor": "G",
       "room": "Office Area",
@@ -2287,7 +2287,7 @@
       "match_type": "No Match",
       "confidence": 0.0,
       "label": "No Match",
-      "timestamp": "2025-11-07T17:18:54.376440+00:00"
+      "timestamp": "2025-11-08T16:39:35.768814+00:00"
     },
     {
       "sensor_id": "SNS-COMPRESSOR-0104",
@@ -2309,7 +2309,7 @@
       "match_type": "Perfect Match",
       "confidence": 86.1,
       "label": "Perfect Match",
-      "timestamp": "2025-06-17T13:35:54.376449+00:00"
+      "timestamp": "2025-06-18T12:56:35.768823+00:00"
     },
     {
       "sensor_id": "SNS-AC-UNIT-0105",
@@ -2331,7 +2331,7 @@
       "match_type": "Perfect Match",
       "confidence": 96.9,
       "label": "Perfect Match",
-      "timestamp": "2025-07-07T03:42:54.376460+00:00"
+      "timestamp": "2025-07-08T03:03:35.768833+00:00"
     },
     {
       "sensor_id": "SNS-EMERGENCY-LIGHTING-0106",
@@ -2353,7 +2353,7 @@
       "match_type": "Perfect Match",
       "confidence": 97.8,
       "label": "Perfect Match",
-      "timestamp": "2025-06-24T09:32:54.376470+00:00"
+      "timestamp": "2025-06-25T08:53:35.768843+00:00"
     },
     {
       "sensor_id": "SNS-UPS-0107",
@@ -2375,18 +2375,18 @@
       "match_type": "Perfect Match",
       "confidence": 99.4,
       "label": "Perfect Match",
-      "timestamp": "2025-09-17T01:13:54.376483+00:00"
+      "timestamp": "2025-09-18T00:34:35.768852+00:00"
     },
     {
-      "sensor_id": "SNS-GENERATOR-0108",
-      "asset_id": "SFM-GENERATOR-050",
-      "asset_name": "Generator - Warehouse East LB2",
-      "asset_type": "Generator",
-      "alert_type": "low_flow",
-      "reading_value": 42.8,
-      "reading_unit": "units",
+      "sensor_id": "SNS-ACCESS-CONTROL-PANEL-0108",
+      "asset_id": "SFM-ACCESS-CONTROL-PANEL-050",
+      "asset_name": "Access Control Panel - Warehouse East LB2",
+      "asset_type": "Access Control Panel",
+      "alert_type": "vibration_high",
+      "reading_value": 12.4,
+      "reading_unit": "mm/s",
       "threshold_min": null,
-      "threshold_max": null,
+      "threshold_max": 7,
       "building": "Warehouse East",
       "floor": "B1",
       "room": "Cafeteria",
@@ -2397,7 +2397,7 @@
       "match_type": "No Match",
       "confidence": 0.0,
       "label": "No Match",
-      "timestamp": "2025-12-11T16:38:54.376494+00:00"
+      "timestamp": "2025-12-12T15:59:35.768862+00:00"
     },
     {
       "sensor_id": "SNS-CARD-READER-0109",
@@ -2419,7 +2419,7 @@
       "match_type": "Perfect Match",
       "confidence": 97.8,
       "label": "Perfect Match",
-      "timestamp": "2025-07-01T00:43:54.376508+00:00"
+      "timestamp": "2025-07-02T00:04:35.768872+00:00"
     },
     {
       "sensor_id": "SNS-NVR-0110",
@@ -2441,7 +2441,7 @@
       "match_type": "LLM Reasoned",
       "confidence": 69.0,
       "label": "LLM Reasoned",
-      "timestamp": "2025-11-18T00:22:54.376519+00:00"
+      "timestamp": "2025-11-18T23:43:35.768882+00:00"
     },
     {
       "sensor_id": "SNS-GENERATOR-0111",
@@ -2463,14 +2463,14 @@
       "match_type": "Perfect Match",
       "confidence": 99.2,
       "label": "Perfect Match",
-      "timestamp": "2025-08-29T22:50:54.376529+00:00"
+      "timestamp": "2025-08-30T22:11:35.768892+00:00"
     },
     {
-      "sensor_id": "SNS-SEWAGE-PUMP-0112",
-      "asset_id": "SFM-SEWAGE-PUMP-011",
-      "asset_name": "Sewage Pump - Tower 1 LG",
-      "asset_type": "Sewage Pump",
-      "alert_type": "heating_failure",
+      "sensor_id": "SNS-BOILER-0112",
+      "asset_id": "SFM-BOILER-011",
+      "asset_name": "Boiler - Tower 1 LG",
+      "asset_type": "Boiler",
+      "alert_type": "reader_offline",
       "reading_value": 65.6,
       "reading_unit": "units",
       "threshold_min": null,
@@ -2485,7 +2485,7 @@
       "match_type": "No Match",
       "confidence": 0.0,
       "label": "No Match",
-      "timestamp": "2025-07-03T16:55:54.376540+00:00"
+      "timestamp": "2025-07-04T16:16:35.768901+00:00"
     },
     {
       "sensor_id": "SNS-ENERGY-METER-0113",
@@ -2507,14 +2507,14 @@
       "match_type": "Perfect Match",
       "confidence": 89.3,
       "label": "Perfect Match",
-      "timestamp": "2025-09-17T21:30:54.376550+00:00"
+      "timestamp": "2025-09-18T20:51:35.768911+00:00"
     },
     {
-      "sensor_id": "SNS-WATER-LEAK-SENSOR-0114",
-      "asset_id": "SFM-WATER-LEAK-SENSOR-039",
-      "asset_name": "Water Leak Sensor - Tower 1 L2",
-      "asset_type": "Water Leak Sensor",
-      "alert_type": "compressor_fault",
+      "sensor_id": "SNS-CCTV-CAMERA-0114",
+      "asset_id": "SFM-CCTV-CAMERA-039",
+      "asset_name": "CCTV Camera - Tower 1 L2",
+      "asset_type": "CCTV Camera",
+      "alert_type": "communication_fault",
       "reading_value": 47.7,
       "reading_unit": "units",
       "threshold_min": null,
@@ -2529,7 +2529,7 @@
       "match_type": "No Match",
       "confidence": 0.0,
       "label": "No Match",
-      "timestamp": "2026-02-11T22:13:54.376560+00:00"
+      "timestamp": "2026-02-12T21:34:35.768921+00:00"
     },
     {
       "sensor_id": "SNS-BOILER-0115",
@@ -2551,14 +2551,14 @@
       "match_type": "Partial Match",
       "confidence": 54.2,
       "label": "Partial Match",
-      "timestamp": "2026-03-23T23:47:54.376570+00:00"
+      "timestamp": "2026-03-24T23:08:35.768930+00:00"
     },
     {
-      "sensor_id": "SNS-ENERGY-METER-0116",
-      "asset_id": "SFM-ENERGY-METER-002",
-      "asset_name": "Energy Meter - Warehouse East LB1",
-      "asset_type": "Energy Meter",
-      "alert_type": "hot_water_failure",
+      "sensor_id": "SNS-LIGHTING-PANEL-0116",
+      "asset_id": "SFM-LIGHTING-PANEL-002",
+      "asset_name": "Lighting Panel - Warehouse East LB1",
+      "asset_type": "Lighting Panel",
+      "alert_type": "compressor_fault",
       "reading_value": 55.2,
       "reading_unit": "units",
       "threshold_min": null,
@@ -2573,7 +2573,7 @@
       "match_type": "LLM Reasoned",
       "confidence": 65.7,
       "label": "LLM Reasoned",
-      "timestamp": "2026-03-24T17:50:54.376581+00:00"
+      "timestamp": "2026-03-25T17:11:35.768941+00:00"
     },
     {
       "sensor_id": "SNS-REFRIGERATION-SYSTEM-0117",
@@ -2595,18 +2595,18 @@
       "match_type": "Partial Match",
       "confidence": 74.0,
       "label": "Partial Match",
-      "timestamp": "2025-09-17T10:04:54.376591+00:00"
+      "timestamp": "2025-09-18T09:25:35.768950+00:00"
     },
     {
-      "sensor_id": "SNS-MCC-0118",
-      "asset_id": "SFM-MCC-041",
-      "asset_name": "MCC - Office Park West L5",
-      "asset_type": "MCC",
-      "alert_type": "low_flow",
-      "reading_value": 35.9,
-      "reading_unit": "units",
+      "sensor_id": "SNS-SMOKE-DETECTOR-0118",
+      "asset_id": "SFM-SMOKE-DETECTOR-041",
+      "asset_name": "Smoke Detector - Office Park West L5",
+      "asset_type": "Smoke Detector",
+      "alert_type": "vibration_high",
+      "reading_value": 11.5,
+      "reading_unit": "mm/s",
       "threshold_min": null,
-      "threshold_max": null,
+      "threshold_max": 7,
       "building": "HQ Building B",
       "floor": "B1",
       "room": "Parking",
@@ -2617,7 +2617,7 @@
       "match_type": "LLM Reasoned",
       "confidence": 67.2,
       "label": "LLM Reasoned",
-      "timestamp": "2026-04-10T21:38:54.376602+00:00"
+      "timestamp": "2026-04-11T20:59:35.768960+00:00"
     },
     {
       "sensor_id": "SNS-FCU-0119",
@@ -2639,7 +2639,7 @@
       "match_type": "Perfect Match",
       "confidence": 95.8,
       "label": "Perfect Match",
-      "timestamp": "2025-12-06T16:04:54.376612+00:00"
+      "timestamp": "2025-12-07T15:25:35.768970+00:00"
     },
     {
       "sensor_id": "SNS-AHU-0120",
@@ -2661,7 +2661,7 @@
       "match_type": "Perfect Match",
       "confidence": 99.3,
       "label": "Perfect Match",
-      "timestamp": "2025-07-30T12:14:54.376622+00:00"
+      "timestamp": "2025-07-31T11:35:35.768979+00:00"
     },
     {
       "sensor_id": "SNS-SUMP-PUMP-0121",
@@ -2683,7 +2683,7 @@
       "match_type": "Perfect Match",
       "confidence": 96.8,
       "label": "Perfect Match",
-      "timestamp": "2025-11-09T21:18:54.376632+00:00"
+      "timestamp": "2025-11-10T20:39:35.768989+00:00"
     },
     {
       "sensor_id": "SNS-HOT-WATER-PUMP-0122",
@@ -2705,7 +2705,7 @@
       "match_type": "Perfect Match",
       "confidence": 92.0,
       "label": "Perfect Match",
-      "timestamp": "2025-05-13T13:24:54.376641+00:00"
+      "timestamp": "2025-05-14T12:45:35.769003+00:00"
     },
     {
       "sensor_id": "SNS-ERU-0123",
@@ -2727,18 +2727,18 @@
       "match_type": "Partial Match",
       "confidence": 60.5,
       "label": "Partial Match",
-      "timestamp": "2025-10-13T11:34:54.376652+00:00"
+      "timestamp": "2025-10-14T10:55:35.769014+00:00"
     },
     {
-      "sensor_id": "SNS-CARD-READER-0124",
-      "asset_id": "SFM-CARD-READER-025",
-      "asset_name": "Card Reader - Warehouse East LG",
-      "asset_type": "Card Reader",
-      "alert_type": "airflow_low",
-      "reading_value": 115.5,
-      "reading_unit": "CFM",
-      "threshold_min": 400,
-      "threshold_max": 600,
+      "sensor_id": "SNS-REFRIGERATION-SYSTEM-0124",
+      "asset_id": "SFM-REFRIGERATION-SYSTEM-025",
+      "asset_name": "Refrigeration System - Warehouse East LG",
+      "asset_type": "Refrigeration System",
+      "alert_type": "controls_failure",
+      "reading_value": 49.3,
+      "reading_unit": "units",
+      "threshold_min": null,
+      "threshold_max": null,
       "building": "Parking Structure",
       "floor": "5",
       "room": "Cafeteria",
@@ -2749,18 +2749,18 @@
       "match_type": "No Match",
       "confidence": 0.0,
       "label": "No Match",
-      "timestamp": "2025-10-12T05:36:54.376662+00:00"
+      "timestamp": "2025-10-13T04:57:35.769024+00:00"
     },
     {
-      "sensor_id": "SNS-SEWAGE-PUMP-0125",
-      "asset_id": "SFM-SEWAGE-PUMP-019",
-      "asset_name": "Sewage Pump - Warehouse East LB1",
-      "asset_type": "Sewage Pump",
-      "alert_type": "airflow_low",
-      "reading_value": 61.8,
-      "reading_unit": "CFM",
-      "threshold_min": 400,
-      "threshold_max": 600,
+      "sensor_id": "SNS-BOILER-0125",
+      "asset_id": "SFM-BOILER-019",
+      "asset_name": "Boiler - Warehouse East LB1",
+      "asset_type": "Boiler",
+      "alert_type": "controls_failure",
+      "reading_value": 17.1,
+      "reading_unit": "units",
+      "threshold_min": null,
+      "threshold_max": null,
       "building": "HQ Building B",
       "floor": "3",
       "room": "Office Area",
@@ -2771,7 +2771,7 @@
       "match_type": "No Match",
       "confidence": 0.0,
       "label": "No Match",
-      "timestamp": "2025-06-30T23:30:54.376672+00:00"
+      "timestamp": "2025-07-01T22:51:35.769033+00:00"
     },
     {
       "sensor_id": "SNS-COMPRESSOR-0126",
@@ -2793,7 +2793,7 @@
       "match_type": "Partial Match",
       "confidence": 65.1,
       "label": "Partial Match",
-      "timestamp": "2025-09-19T03:18:54.376682+00:00"
+      "timestamp": "2025-09-20T02:39:35.769043+00:00"
     },
     {
       "sensor_id": "SNS-BOOSTER-PUMP-0127",
@@ -2815,14 +2815,14 @@
       "match_type": "Perfect Match",
       "confidence": 95.2,
       "label": "Perfect Match",
-      "timestamp": "2026-04-20T00:10:54.376692+00:00"
+      "timestamp": "2026-04-20T23:31:35.769052+00:00"
     },
     {
-      "sensor_id": "SNS-WATER-HEATER-0128",
-      "asset_id": "SFM-WATER-HEATER-024",
-      "asset_name": "Water Heater - Warehouse East L5",
-      "asset_type": "Water Heater",
-      "alert_type": "filter_dirty",
+      "sensor_id": "SNS-SUPPLY-FAN-0128",
+      "asset_id": "SFM-SUPPLY-FAN-024",
+      "asset_name": "Supply Fan - Warehouse East L5",
+      "asset_type": "Supply Fan",
+      "alert_type": "defrost_fault",
       "reading_value": 12.9,
       "reading_unit": "units",
       "threshold_min": null,
@@ -2837,7 +2837,7 @@
       "match_type": "No Match",
       "confidence": 0.0,
       "label": "No Match",
-      "timestamp": "2026-02-15T07:36:54.376702+00:00"
+      "timestamp": "2026-02-16T06:57:35.769062+00:00"
     },
     {
       "sensor_id": "SNS-UPS-0129",
@@ -2859,7 +2859,7 @@
       "match_type": "Perfect Match",
       "confidence": 86.7,
       "label": "Perfect Match",
-      "timestamp": "2026-01-29T13:31:54.376713+00:00"
+      "timestamp": "2026-01-30T12:52:35.769072+00:00"
     },
     {
       "sensor_id": "SNS-MOTOR-0130",
@@ -2881,7 +2881,7 @@
       "match_type": "Perfect Match",
       "confidence": 92.4,
       "label": "Perfect Match",
-      "timestamp": "2026-03-04T00:10:54.376723+00:00"
+      "timestamp": "2026-03-04T23:31:35.769081+00:00"
     },
     {
       "sensor_id": "SNS-NVR-0131",
@@ -2903,17 +2903,17 @@
       "match_type": "Perfect Match",
       "confidence": 98.4,
       "label": "Perfect Match",
-      "timestamp": "2026-02-13T06:19:54.376733+00:00"
+      "timestamp": "2026-02-14T05:40:35.769091+00:00"
     },
     {
-      "sensor_id": "SNS-UPS-0132",
-      "asset_id": "SFM-UPS-006",
-      "asset_name": "UPS - HQ Building B L2",
-      "asset_type": "UPS",
-      "alert_type": "freezer_temp_high",
-      "reading_value": 16.1,
-      "reading_unit": "\u00b0F",
-      "threshold_min": -20,
+      "sensor_id": "SNS-PUMP-0132",
+      "asset_id": "SFM-PUMP-006",
+      "asset_name": "Pump - HQ Building B L2",
+      "asset_type": "Pump",
+      "alert_type": "fan_fault",
+      "reading_value": 59.9,
+      "reading_unit": "units",
+      "threshold_min": null,
       "threshold_max": null,
       "building": "Data Center",
       "floor": "5",
@@ -2925,7 +2925,7 @@
       "match_type": "LLM Reasoned",
       "confidence": 68.9,
       "label": "LLM Reasoned",
-      "timestamp": "2025-07-27T00:25:54.376745+00:00"
+      "timestamp": "2025-07-27T23:46:35.769101+00:00"
     },
     {
       "sensor_id": "SNS-SEWAGE-PUMP-0133",
@@ -2947,7 +2947,7 @@
       "match_type": "Partial Match",
       "confidence": 83.1,
       "label": "Partial Match",
-      "timestamp": "2025-06-11T02:36:54.376756+00:00"
+      "timestamp": "2025-06-12T01:57:35.769111+00:00"
     },
     {
       "sensor_id": "SNS-THERMOSTAT-0134",
@@ -2969,14 +2969,14 @@
       "match_type": "Perfect Match",
       "confidence": 85.8,
       "label": "Perfect Match",
-      "timestamp": "2026-03-02T12:55:54.376767+00:00"
+      "timestamp": "2026-03-03T12:16:35.769120+00:00"
     },
     {
-      "sensor_id": "SNS-SEWAGE-PUMP-0135",
-      "asset_id": "SFM-SEWAGE-PUMP-040",
-      "asset_name": "Sewage Pump - Retail Unit R1 LB1",
-      "asset_type": "Sewage Pump",
-      "alert_type": "compressor_fault",
+      "sensor_id": "SNS-BOILER-0135",
+      "asset_id": "SFM-BOILER-040",
+      "asset_name": "Boiler - Retail Unit R1 LB1",
+      "asset_type": "Boiler",
+      "alert_type": "communication_fault",
       "reading_value": 67.2,
       "reading_unit": "units",
       "threshold_min": null,
@@ -2991,14 +2991,14 @@
       "match_type": "LLM Reasoned",
       "confidence": 73.2,
       "label": "LLM Reasoned",
-      "timestamp": "2026-03-01T08:45:54.376777+00:00"
+      "timestamp": "2026-03-02T08:06:35.769130+00:00"
     },
     {
-      "sensor_id": "SNS-BOILER-0136",
-      "asset_id": "SFM-BOILER-002",
-      "asset_name": "Boiler - HQ Building B LB2",
-      "asset_type": "Boiler",
-      "alert_type": "fan_fault",
+      "sensor_id": "SNS-UPS-0136",
+      "asset_id": "SFM-UPS-002",
+      "asset_name": "UPS - HQ Building B LB2",
+      "asset_type": "UPS",
+      "alert_type": "heating_failure",
       "reading_value": 64.5,
       "reading_unit": "units",
       "threshold_min": null,
@@ -3013,14 +3013,14 @@
       "match_type": "No Match",
       "confidence": 0.0,
       "label": "No Match",
-      "timestamp": "2025-07-21T03:12:54.376787+00:00"
+      "timestamp": "2025-07-22T02:33:35.769140+00:00"
     },
     {
-      "sensor_id": "SNS-FIRE-ALARM-PANEL-0137",
-      "asset_id": "SFM-FIRE-ALARM-PANEL-031",
-      "asset_name": "Fire Alarm Panel - Tower 2 L4",
-      "asset_type": "Fire Alarm Panel",
-      "alert_type": "sensor_drift",
+      "sensor_id": "SNS-AHU-0137",
+      "asset_id": "SFM-AHU-031",
+      "asset_name": "AHU - Tower 2 L4",
+      "asset_type": "AHU",
+      "alert_type": "low_flow",
       "reading_value": 66.4,
       "reading_unit": "units",
       "threshold_min": null,
@@ -3035,7 +3035,7 @@
       "match_type": "No Match",
       "confidence": 0.0,
       "label": "No Match",
-      "timestamp": "2025-12-07T08:45:54.376798+00:00"
+      "timestamp": "2025-12-08T08:06:35.769150+00:00"
     },
     {
       "sensor_id": "SNS-DDC-0138",
@@ -3057,7 +3057,7 @@
       "match_type": "Perfect Match",
       "confidence": 88.1,
       "label": "Perfect Match",
-      "timestamp": "2025-06-29T00:44:54.376807+00:00"
+      "timestamp": "2025-06-30T00:05:35.769159+00:00"
     },
     {
       "sensor_id": "SNS-BOILER-0139",
@@ -3079,14 +3079,14 @@
       "match_type": "Perfect Match",
       "confidence": 89.0,
       "label": "Perfect Match",
-      "timestamp": "2025-12-30T00:58:54.376818+00:00"
+      "timestamp": "2025-12-31T00:19:35.769169+00:00"
     },
     {
-      "sensor_id": "SNS-SMOKE-DETECTOR-0140",
-      "asset_id": "SFM-SMOKE-DETECTOR-030",
-      "asset_name": "Smoke Detector - Parking Structure L2",
-      "asset_type": "Smoke Detector",
-      "alert_type": "defrost_fault",
+      "sensor_id": "SNS-COMPRESSOR-0140",
+      "asset_id": "SFM-COMPRESSOR-030",
+      "asset_name": "Compressor - Parking Structure L2",
+      "asset_type": "Compressor",
+      "alert_type": "water_level_low",
       "reading_value": 27.1,
       "reading_unit": "units",
       "threshold_min": null,
@@ -3101,14 +3101,14 @@
       "match_type": "No Match",
       "confidence": 0.0,
       "label": "No Match",
-      "timestamp": "2026-02-12T13:32:54.376828+00:00"
+      "timestamp": "2026-02-13T12:53:35.769180+00:00"
     },
     {
-      "sensor_id": "SNS-REFRIGERATION-SYSTEM-0141",
-      "asset_id": "SFM-REFRIGERATION-SYSTEM-042",
-      "asset_name": "Refrigeration System - Parking Structure L2",
-      "asset_type": "Refrigeration System",
-      "alert_type": "bearing_fault",
+      "sensor_id": "SNS-FREEZER-0141",
+      "asset_id": "SFM-FREEZER-042",
+      "asset_name": "Freezer - Parking Structure L2",
+      "asset_type": "Freezer",
+      "alert_type": "setpoint_deviation",
       "reading_value": 41.8,
       "reading_unit": "units",
       "threshold_min": null,
@@ -3123,7 +3123,7 @@
       "match_type": "LLM Reasoned",
       "confidence": 61.2,
       "label": "LLM Reasoned",
-      "timestamp": "2025-08-24T09:08:54.376838+00:00"
+      "timestamp": "2025-08-25T08:29:35.769190+00:00"
     },
     {
       "sensor_id": "SNS-MCC-0142",
@@ -3145,7 +3145,7 @@
       "match_type": "Partial Match",
       "confidence": 62.4,
       "label": "Partial Match",
-      "timestamp": "2025-10-12T03:28:54.376849+00:00"
+      "timestamp": "2025-10-13T02:49:35.769200+00:00"
     },
     {
       "sensor_id": "SNS-FREEZER-0143",
@@ -3167,18 +3167,18 @@
       "match_type": "Partial Match",
       "confidence": 83.6,
       "label": "Partial Match",
-      "timestamp": "2025-05-21T09:57:54.376860+00:00"
+      "timestamp": "2025-05-22T09:18:35.769209+00:00"
     },
     {
-      "sensor_id": "SNS-BOILER-0144",
-      "asset_id": "SFM-BOILER-046",
-      "asset_name": "Boiler - Warehouse East L5",
-      "asset_type": "Boiler",
-      "alert_type": "temperature_high",
-      "reading_value": 85.0,
-      "reading_unit": "\u00b0F",
-      "threshold_min": 55,
-      "threshold_max": 72,
+      "sensor_id": "SNS-UPS-0144",
+      "asset_id": "SFM-UPS-046",
+      "asset_name": "UPS - Warehouse East L5",
+      "asset_type": "UPS",
+      "alert_type": "generator_fault",
+      "reading_value": 55.0,
+      "reading_unit": "units",
+      "threshold_min": null,
+      "threshold_max": null,
       "building": "Retail Unit R1",
       "floor": "5",
       "room": "Plant Room",
@@ -3189,7 +3189,7 @@
       "match_type": "No Match",
       "confidence": 0.0,
       "label": "No Match",
-      "timestamp": "2026-04-12T03:56:54.376870+00:00"
+      "timestamp": "2026-04-13T03:17:35.769219+00:00"
     },
     {
       "sensor_id": "SNS-SCADA-0145",
@@ -3211,7 +3211,7 @@
       "match_type": "Perfect Match",
       "confidence": 89.8,
       "label": "Perfect Match",
-      "timestamp": "2025-10-15T09:17:54.376880+00:00"
+      "timestamp": "2025-10-16T08:38:35.769228+00:00"
     },
     {
       "sensor_id": "SNS-ESCALATOR-0146",
@@ -3233,14 +3233,14 @@
       "match_type": "Perfect Match",
       "confidence": 90.5,
       "label": "Perfect Match",
-      "timestamp": "2025-05-26T01:38:54.376890+00:00"
+      "timestamp": "2025-05-27T00:59:35.769238+00:00"
     },
     {
-      "sensor_id": "SNS-PUMP-0147",
-      "asset_id": "SFM-PUMP-047",
-      "asset_name": "Pump - Office Park West L4",
-      "asset_type": "Pump",
-      "alert_type": "door_fault",
+      "sensor_id": "SNS-WALK-IN-COOLER-0147",
+      "asset_id": "SFM-WALK-IN-COOLER-047",
+      "asset_name": "Walk-in Cooler - Office Park West L4",
+      "asset_type": "Walk-in Cooler",
+      "alert_type": "filter_dirty",
       "reading_value": 62.5,
       "reading_unit": "units",
       "threshold_min": null,
@@ -3255,7 +3255,7 @@
       "match_type": "No Match",
       "confidence": 0.0,
       "label": "No Match",
-      "timestamp": "2026-02-06T12:24:54.376901+00:00"
+      "timestamp": "2026-02-07T11:45:35.769249+00:00"
     },
     {
       "sensor_id": "SNS-CCTV-CAMERA-0148",
@@ -3277,14 +3277,14 @@
       "match_type": "Perfect Match",
       "confidence": 89.7,
       "label": "Perfect Match",
-      "timestamp": "2026-02-16T15:20:54.376911+00:00"
+      "timestamp": "2026-02-17T14:41:35.769259+00:00"
     },
     {
-      "sensor_id": "SNS-SEWAGE-PUMP-0149",
-      "asset_id": "SFM-SEWAGE-PUMP-035",
-      "asset_name": "Sewage Pump - Warehouse East LRoof",
-      "asset_type": "Sewage Pump",
-      "alert_type": "flood_detection",
+      "sensor_id": "SNS-BOILER-0149",
+      "asset_id": "SFM-BOILER-035",
+      "asset_name": "Boiler - Warehouse East LRoof",
+      "asset_type": "Boiler",
+      "alert_type": "hot_water_failure",
       "reading_value": 69.6,
       "reading_unit": "units",
       "threshold_min": null,
@@ -3299,7 +3299,7 @@
       "match_type": "LLM Reasoned",
       "confidence": 72.6,
       "label": "LLM Reasoned",
-      "timestamp": "2025-11-25T23:35:54.376922+00:00"
+      "timestamp": "2025-11-26T22:56:35.769269+00:00"
     }
   ]
 }

@@ -14,9 +14,14 @@ import pandas as pd
 import streamlit as st
 import plotly.express as px
 import plotly.graph_objects as go
+import logging
 from dotenv import load_dotenv
 
 load_dotenv()
+
+logging.basicConfig(level=logging.INFO)
+_logger = logging.getLogger(__name__)
+_logger.info("ENV testdata = %s", os.getenv("testdata"))
 
 # ── Page config ───────────────────────────────────────────────────────────────
 st.set_page_config(

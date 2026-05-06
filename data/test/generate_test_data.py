@@ -482,11 +482,13 @@ IFM_DATA = [
         "floor_name": "Floor 1", "room_name": "Compressor Room", "customer_name": "Clorox",
     },
     # ── LLM Reasoned IFM targets (name semantically same but text very different) ─
+    # IFM-L01/L02/L03: blank make/model/serial so Approach 3 cannot fire.
+    # Name is semantically same as SFM but textually unrecognisable by fuzzy scorers.
+    # Only the LLM can bridge "HVAC-1" → "Air Handling System Unit 1", etc.
     {
         "asset_id": "IFM-L01", "asset_alternate_id": "ALTL-01",
         "asset_name": "Air Handling System Unit 1",
-        "asset_status": "ACTIVE", "manufacturer": "Carrier",
-        "serial_number": "CAR-LLM-01", "model": "AHF-200",
+        "asset_status": "ACTIVE", "manufacturer": "", "serial_number": "", "model": "",
         "equip_part_description": "Air Handling System",
         "position_name": "AHS-1",
         "position_type_description": "Air Handling Unit",
@@ -497,8 +499,7 @@ IFM_DATA = [
     {
         "asset_id": "IFM-L02", "asset_alternate_id": "ALTL-02",
         "asset_name": "Refrigeration System Alpha",
-        "asset_status": "ACTIVE", "manufacturer": "Copeland",
-        "serial_number": "COP-LLM-02", "model": "ZP54K",
+        "asset_status": "ACTIVE", "manufacturer": "", "serial_number": "", "model": "",
         "equip_part_description": "Refrigeration System",
         "position_name": "REFRIG-ALPHA",
         "position_type_description": "Refrigeration",
@@ -509,8 +510,7 @@ IFM_DATA = [
     {
         "asset_id": "IFM-L03", "asset_alternate_id": "ALTL-03",
         "asset_name": "Emergency Standby Generator 1",
-        "asset_status": "ACTIVE", "manufacturer": "Generac",
-        "serial_number": "GEN-LLM-03", "model": "SG150",
+        "asset_status": "ACTIVE", "manufacturer": "", "serial_number": "", "model": "",
         "equip_part_description": "Emergency Generator",
         "position_name": "ESG-1",
         "position_type_description": "Generator",
