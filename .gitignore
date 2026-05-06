@@ -25,9 +25,10 @@ env/
 *.swp
 *.swo
 
-# Data / outputs (large files)
+# Data / outputs (large files — append-only logs, auto-created DBs)
 data/review_queue.db
 data/pipeline_outcomes.jsonl
+data/llm_metrics.jsonl
 data/training/active_learning.jsonl
 
 # OS

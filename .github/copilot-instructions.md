@@ -12,7 +12,7 @@ A Gen-AI engineering platform with two connected pipelines:
 
 | Pipeline | What it does |
 |---|---|
-| **Asset Mapping** | Match SFM assets to IFM Hub assets using a 5-approach fuzzy + LLM cascade (LangGraph) |
+| **Asset Mapping** | Match SFM assets to IFM Hub assets using an 8-node fuzzy + LLM cascade (LangGraph) |
 | **Sensor → Work Order** | Ingest IoT sensor alerts → classify to IFM service → auto-create work order or queue for human review |
 
 ---
@@ -85,7 +85,7 @@ smartfm-mapping/
 | 1 | Upload & Map | File upload → LangGraph pipeline → results table with colour-coded tiers |
 | 2 | Dashboard | KPI cards, Plotly pie chart (match type distribution), histogram, building bar chart, lowest-confidence assets |
 | 3 | AI Chat | LangChain ReAct agent + direct GPT-5.5 fallback answering NL questions about the data |
-| 4 | Sensor Monitor | Demo sensor events, custom alert form, decision outcome KPIs, pie chart |
+| 4 | Sensor Monitor | Scenario picker (14 pre-built scenarios + Custom), demo batch run, decision outcome KPIs, pie chart |
 | 5 | Review Queue | SQLite queue — Approve / Reject / Escalate buttons per pending item |
 | 6 | LLM Analytics | Real-time LLM call metrics: KPIs, by-model bar, by-purpose pie, by-pipeline bar, latency timeline, raw log |
 
@@ -111,7 +111,7 @@ START → approach1 → approach2 → approach3 → partial1 → partial2 → ll
 - Scorers use `rapidfuzz.fuzz.token_set_ratio`
 - Thresholds: Perfect needs name ≥ 90, Partial needs name ≥ 50
 - **`llm_verify_partial` node** (NEW): runs after partial1 and partial2 — GPT-5.5 confirms or rejects fuzzy partial match before marking it final; confirmed → `"<type> (LLM Verified)"`; rejected → forwards to `llm_reason`
-- **`llm_reason` node**: sends top-5 candidates to GPT-5.5 for final decision when no fuzzy match succeeded
+- **`llm_reason` node**: sends top-3 candidates to **Claude Sonnet 4.6** (via `AnthropicFoundry`) for final decision when no fuzzy match succeeded; falls back to GPT-5.5 if Claude key missing
 - State object: `AssetMappingState` TypedDict (includes `llm_verify_note: str` field)
 - Every LLM call records metrics via `llm/metrics_tracker.py`
 
@@ -128,8 +128,8 @@ SensorEvent → ServiceClassifier (4 tiers) → decide_action() → AUTO_CREATE 
 | Tier | Confidence | Action |
 |---|---|---|
 | Perfect ≥ 85% | High composite score | AUTO_CREATE work order |
-| Partial 50–84% | Medium score | REVIEW queue |
-| LLM 30–49% | LLM fallback call | REVIEW queue |
+| Partial 50–84% | Medium score + GPT-5.5 LLM verify | REVIEW queue |
+| LLM 30–49% | GPT-5.5 full LLM classify fallback | REVIEW queue |
 | No Match < 30% | Nothing matches | NO_ACTION, log only |
 
 ---
@@ -256,8 +256,8 @@ cp .env.example .env
 # Edit .env and fill in your Azure keys
 
 # 4. Launch dashboard
-streamlit run app.py --server.port 8501
-# Open http://localhost:8501
+/Users/$USER/Library/Python/3.9/bin/streamlit run app.py --server.port 8502
+# Open http://localhost:8502
 ```
 
 ---
