@@ -587,7 +587,7 @@ Sensor Alert  →  Service Classifier (4-tier)  →  Decision Engine
         ] if c in df_out.columns]
 
         st.dataframe(
-            df_out[cols_show].style.applymap(_color_decision, subset=["decision"]),
+            df_out[cols_show].style.map(_color_decision, subset=["decision"]),
             use_container_width=True, height=360,
         )
 

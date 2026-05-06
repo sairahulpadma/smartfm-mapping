@@ -11,7 +11,11 @@ import json
 import pandas as pd
 from typing import Optional
 
-from langchain.agents import AgentExecutor, create_react_agent
+try:
+    from langchain.agents import AgentExecutor, create_react_agent
+    _AGENT_AVAILABLE = True
+except ImportError:
+    _AGENT_AVAILABLE = False
 from langchain_core.tools import tool
 from langchain_core.prompts import PromptTemplate
 from langchain_openai import AzureChatOpenAI
@@ -184,18 +188,20 @@ def get_chat_response(user_message: str, chat_history: list[dict]) -> str:
     if _results_df is None:
         return "Please run the asset mapping first before asking questions about the data."
 
+    if not _AGENT_AVAILABLE:
+        return _fallback_answer(user_message)
+
     try:
         llm = _build_llm()
-        agent = create_react_agent(llm, _TOOLS, _PROMPT)
-        executor = AgentExecutor(
+        agent = create_react_agent(llm, _TOOLS, _PROMPT)  # noqa: F821
+        executor = AgentExecutor(  # noqa: F821
             agent=agent, tools=_TOOLS,
             verbose=False, handle_parsing_errors=True,
             max_iterations=5,
         )
         result = executor.invoke({"input": user_message})
         return result.get("output", "I could not generate a response.")
-    except Exception as e:
-        # Graceful fallback: answer directly from data
+    except Exception:
         return _fallback_answer(user_message)
 
 
