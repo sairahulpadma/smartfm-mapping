@@ -234,7 +234,7 @@ with tab1:
                 filtered["sfm_nav_name"].str.contains(search, case=False, na=False)
             ]
 
-        styled = filtered.style.applymap(color_match, subset=["match_type"])
+        styled = filtered.style.map(color_match, subset=["match_type"])
         st.dataframe(styled, use_container_width=True, height=420)
 
         # Download
