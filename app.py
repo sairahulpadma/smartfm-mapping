@@ -61,6 +61,7 @@ for key, default in [
     ("mapping_done", False),
     ("sensor_outcomes", []),
     ("pipeline_obj", None),
+    ("alert_queue", []),
 ]:
     if key not in st.session_state:
         st.session_state[key] = default
@@ -663,17 +664,9 @@ Sensor Alert  →  Service Classifier (4-tier)  →  Decision Engine
             r2.metric("Severity",      preset["severity"])
             r3.metric("Threshold",     v.get("threshold_max", v.get("threshold_min", "—")))
 
-            if st.button("⚡ Submit This Scenario", type="primary"):
-                from pipeline.orchestrator import get_pipeline
-                pipe = get_pipeline(use_llm=use_llm_sensor, demo_mode=demo_mode)
-                outcome = pipe.process_raw_event(preset)
-                st.session_state.sensor_outcomes.append(outcome)
-                st.success(
-                    f"Decision: **{outcome['decision']}** | "
-                    f"Match: **{outcome['match_type']}** | "
-                    f"Service: **{outcome.get('service_classification_name', '—')}** | "
-                    f"Confidence: **{outcome.get('confidence', 0):.1f}%**"
-                )
+            if st.button("➕ Add to Alert Queue", type="primary"):
+                st.session_state.alert_queue.append(preset)
+                st.success(f"Added **{preset['asset_name']}** ({preset['alert_type']}) to queue.")
                 st.rerun()
 
         else:
@@ -712,9 +705,7 @@ Sensor Alert  →  Service Classifier (4-tier)  →  Decision Engine
                 c_reading_unit = st.text_input("Unit", value="°F")
                 c_threshold    = st.number_input("Max Threshold", value=72.0)
 
-            if st.button("⚡ Submit Custom Alert", type="primary"):
-                from pipeline.orchestrator import get_pipeline
-                pipe = get_pipeline(use_llm=use_llm_sensor, demo_mode=demo_mode)
+            if st.button("➕ Add Custom to Queue", type="primary"):
                 raw = {
                     "sensor_id":  f"SNS-CUSTOM-{c_asset_type.replace(' ', '-').upper()}",
                     "asset_id":   "SFM-CUSTOM-001",
@@ -731,15 +722,77 @@ Sensor Alert  →  Service Classifier (4-tier)  →  Decision Engine
                         "threshold_max": c_threshold,
                     },
                 }
-                outcome = pipe.process_raw_event(raw)
-                st.session_state.sensor_outcomes.append(outcome)
+                st.session_state.alert_queue.append(raw)
+                st.success(f"Added custom alert **{c_asset_name}** ({c_alert_type}) to queue.")
+                st.rerun()
+
+    # ── Alert Queue ───────────────────────────────────────────────────────
+    st.divider()
+    st.subheader("📋 Alert Queue")
+
+    if st.session_state.alert_queue:
+        q = st.session_state.alert_queue
+        st.caption(f"{len(q)} alert(s) queued for processing.")
+
+        for i, item in enumerate(q):
+            qcol1, qcol2, qcol3, qcol4, qcol5 = st.columns([2, 2, 2, 1, 1])
+            qcol1.text(item.get("asset_name", "—"))
+            qcol2.text(item.get("alert_type", "—"))
+            qcol3.text(item.get("building", "—"))
+            qcol4.text(item.get("severity", "—"))
+            if qcol5.button("✕", key=f"remove_q_{i}"):
+                st.session_state.alert_queue.pop(i)
+                st.rerun()
+
+        pcol1, pcol2, pcol3 = st.columns([2, 2, 1])
+        with pcol1:
+            if st.button(
+                f"⚡ Process All ({len(q)} alert{'s' if len(q) != 1 else ''})",
+                type="primary",
+                key="process_queue_btn",
+            ):
+                from pipeline.orchestrator import get_pipeline
+                pipe = get_pipeline(use_llm=use_llm_sensor, demo_mode=demo_mode)
+                with st.spinner(f"Processing {len(q)} alert(s)…"):
+                    batch_outcomes = pipe.process_batch(q)
+                for outcome in batch_outcomes:
+                    st.session_state.sensor_outcomes.append(outcome)
+                st.session_state.alert_queue = []
+                auto_b   = sum(1 for o in batch_outcomes if o.get("decision") == "AUTO_CREATE")
+                review_b = sum(1 for o in batch_outcomes if o.get("decision") == "REVIEW")
+                no_act_b = sum(1 for o in batch_outcomes if o.get("decision") == "NO_ACTION")
                 st.success(
-                    f"Decision: **{outcome['decision']}** | "
-                    f"Match: **{outcome['match_type']}** | "
-                    f"Service: **{outcome.get('service_classification_name', '—')}** | "
-                    f"Confidence: **{outcome.get('confidence', 0):.1f}%**"
+                    f"✅ Processed **{len(batch_outcomes)}** alerts — "
+                    f"Auto-Create: **{auto_b}** | Review: **{review_b}** | No Action: **{no_act_b}**"
                 )
                 st.rerun()
+        with pcol2:
+            if st.button(
+                f"🔗 Process Correlated ({len(q)} alert{'s' if len(q) != 1 else ''})",
+                type="primary",
+                key="process_correlated_btn",
+                help="LLM groups related alerts (e.g. multiple offline devices in same location → single power outage request)",
+            ):
+                from pipeline.orchestrator import get_pipeline
+                pipe = get_pipeline(use_llm=use_llm_sensor, demo_mode=demo_mode)
+                with st.spinner(f"🔗 Correlating & processing {len(q)} alert(s) via LLM…"):
+                    batch_outcomes = pipe.process_correlated_batch(q)
+                for outcome in batch_outcomes:
+                    st.session_state.sensor_outcomes.append(outcome)
+                st.session_state.alert_queue = []
+                correlated_count = sum(1 for o in batch_outcomes if o.get("correlated"))
+                individual_count = len(batch_outcomes) - correlated_count
+                st.success(
+                    f"🔗 Correlated processing complete — **{len(batch_outcomes)}** work order(s) from **{len(q)}** alerts. "
+                    f"Correlated groups: **{correlated_count}** | Individual: **{individual_count}**"
+                )
+                st.rerun()
+        with pcol3:
+            if st.button("🗑️ Clear Queue", key="clear_queue_btn"):
+                st.session_state.alert_queue = []
+                st.rerun()
+    else:
+        st.info("Queue is empty. Use the form above to add alerts, then process them all at once.")
 
     # ── Results ───────────────────────────────────────────────────────────────
     if st.session_state.sensor_outcomes:
@@ -776,12 +829,28 @@ Sensor Alert  →  Service Classifier (4-tier)  →  Decision Engine
         cols_show = [c for c in [
             "asset_name", "alert_type", "severity", "building",
             "service_classification_name", "match_type", "confidence", "decision",
+            "correlated_count", "root_cause",
         ] if c in df_out.columns]
 
         st.dataframe(
             df_out[cols_show].style.map(_color_decision, subset=["decision"]),
             use_container_width=True, height=360,
         )
+
+        # Show correlated group details if any
+        correlated_rows = [o for o in outcomes if o.get("correlated")]
+        if correlated_rows:
+            with st.expander(f"🔗 Correlated Groups ({len(correlated_rows)} group{'s' if len(correlated_rows) != 1 else ''})"):
+                for cr in correlated_rows:
+                    st.markdown(
+                        f"**{cr.get('service_classification_name', '—')}** — "
+                        f"{cr.get('correlated_count', 0)} alerts grouped | "
+                        f"Decision: `{cr.get('decision')}` | "
+                        f"Confidence: {cr.get('confidence', 0):.1f}%"
+                    )
+                    st.caption(f"Root cause: {cr.get('root_cause', '—')}")
+                    st.caption(f"Assets: {', '.join(cr.get('correlated_assets', []))}")
+                    st.divider()
 
         # Decision chart
         _dec_counts = df_out["decision"].value_counts().reset_index()
@@ -1081,6 +1150,157 @@ with tab6:
             ]
             if comp_data:
                 st.dataframe(pd.DataFrame(comp_data), use_container_width=True)
+
+            # ── OpenAI vs Anthropic comparison ───────────────────────────────
+            st.divider()
+            st.subheader("⚖️ OpenAI vs Anthropic — Head-to-Head Comparison")
+            st.caption(
+                "Aggregated metrics across all models grouped by provider. "
+                "Cost estimates use indicative Azure-hosted per-token rates."
+            )
+
+            by_provider = summary.get("by_provider", {})
+            if len(by_provider) < 1:
+                st.info("No provider data yet. Run the pipeline to populate metrics.")
+            else:
+                # ── Provider KPI cards ────────────────────────────────────────
+                provider_order = ["OpenAI", "Anthropic"]
+                providers_present = [p for p in provider_order if p in by_provider] + \
+                                    [p for p in by_provider if p not in provider_order]
+
+                PROVIDER_COLOR = {"OpenAI": "#40c4ff", "Anthropic": "#ffca28", "Other": "#00e676"}
+                PROVIDER_ICON  = {"OpenAI": "🔵", "Anthropic": "🟡", "Other": "🟢"}
+
+                kpi_cols = st.columns(len(providers_present))
+                for col, prov in zip(kpi_cols, providers_present):
+                    pv = by_provider[prov]
+                    avg_lat_prov = round(pv["total_latency_ms"] / pv["calls"]) if pv["calls"] else 0
+                    tok_total = pv["tokens_in"] + pv["tokens_out"]
+                    cost_fmt = f"${pv['cost_usd']:.4f}"
+                    color = PROVIDER_COLOR.get(prov, "#00e676")
+                    icon  = PROVIDER_ICON.get(prov, "⚪")
+                    with col:
+                        st.markdown(
+                            f'<div class="kpi-card" style="border-top: 3px solid {color};">'
+                            f'<div class="kpi-label">{icon} {prov}</div>'
+                            f'<div class="kpi-value" style="font-size:1rem;">'
+                            f'Calls: <b>{pv["calls"]}</b><br>'
+                            f'Tokens: <b>{tok_total:,}</b><br>'
+                            f'Avg Latency: <b>{avg_lat_prov} ms</b><br>'
+                            f'Est. Cost: <b>{cost_fmt}</b>'
+                            f'</div></div>',
+                            unsafe_allow_html=True,
+                        )
+
+                st.markdown("&nbsp;", unsafe_allow_html=True)
+
+                # Build comparison DataFrame for charts
+                cmp_rows = []
+                for prov in providers_present:
+                    pv = by_provider[prov]
+                    avg_lat_prov = round(pv["total_latency_ms"] / pv["calls"], 1) if pv["calls"] else 0
+                    cmp_rows.append({
+                        "Provider":         prov,
+                        "Input Tokens":     pv["tokens_in"],
+                        "Output Tokens":    pv["tokens_out"],
+                        "Total Tokens":     pv["tokens_in"] + pv["tokens_out"],
+                        "Avg Latency (ms)": avg_lat_prov,
+                        "Est. Cost (USD)":  round(pv["cost_usd"], 6),
+                        "Total Calls":      pv["calls"],
+                    })
+                cmp_df = pd.DataFrame(cmp_rows)
+
+                lca, lcb, lcc = st.columns(3)
+
+                # ── Token comparison ──────────────────────────────────────────
+                with lca:
+                    st.markdown("**Token Usage**")
+                    tok_long = []
+                    for row in cmp_rows:
+                        tok_long.append({"Provider": row["Provider"], "Type": "Input",  "Tokens": row["Input Tokens"]})
+                        tok_long.append({"Provider": row["Provider"], "Type": "Output", "Tokens": row["Output Tokens"]})
+                    tok_df = pd.DataFrame(tok_long)
+                    fig_tok = px.bar(
+                        tok_df, x="Provider", y="Tokens", color="Type",
+                        barmode="group",
+                        color_discrete_map={"Input": "#40c4ff", "Output": "#ffca28"},
+                        text="Tokens",
+                    )
+                    fig_tok.update_traces(texttemplate="%{text:,}", textposition="outside")
+                    fig_tok.update_layout(
+                        paper_bgcolor="rgba(0,0,0,0)", font_color="white",
+                        plot_bgcolor="rgba(0,0,0,0)", showlegend=True,
+                        xaxis=dict(gridcolor="#1a1a2e"),
+                        yaxis=dict(gridcolor="#1a1a2e"),
+                        legend=dict(bgcolor="rgba(0,0,0,0)"),
+                        margin=dict(t=30, b=10),
+                    )
+                    st.plotly_chart(fig_tok, use_container_width=True)
+
+                # ── Latency comparison ────────────────────────────────────────
+                with lcb:
+                    st.markdown("**Average Latency (ms)**")
+                    fig_lat = px.bar(
+                        cmp_df, x="Provider", y="Avg Latency (ms)",
+                        color="Provider",
+                        color_discrete_map={"OpenAI": "#40c4ff", "Anthropic": "#ffca28", "Other": "#00e676"},
+                        text="Avg Latency (ms)",
+                    )
+                    fig_lat.update_traces(texttemplate="%{text:.0f} ms", textposition="outside")
+                    fig_lat.update_layout(
+                        paper_bgcolor="rgba(0,0,0,0)", font_color="white",
+                        plot_bgcolor="rgba(0,0,0,0)", showlegend=False,
+                        xaxis=dict(gridcolor="#1a1a2e"),
+                        yaxis=dict(gridcolor="#1a1a2e"),
+                        margin=dict(t=30, b=10),
+                    )
+                    st.plotly_chart(fig_lat, use_container_width=True)
+
+                # ── Cost comparison ───────────────────────────────────────────
+                with lcc:
+                    st.markdown("**Estimated Cost (USD)**")
+                    fig_cost = px.bar(
+                        cmp_df, x="Provider", y="Est. Cost (USD)",
+                        color="Provider",
+                        color_discrete_map={"OpenAI": "#40c4ff", "Anthropic": "#ffca28", "Other": "#00e676"},
+                        text="Est. Cost (USD)",
+                    )
+                    fig_cost.update_traces(texttemplate="$%{text:.4f}", textposition="outside")
+                    fig_cost.update_layout(
+                        paper_bgcolor="rgba(0,0,0,0)", font_color="white",
+                        plot_bgcolor="rgba(0,0,0,0)", showlegend=False,
+                        xaxis=dict(gridcolor="#1a1a2e"),
+                        yaxis=dict(gridcolor="#1a1a2e"),
+                        margin=dict(t=30, b=10),
+                    )
+                    st.plotly_chart(fig_cost, use_container_width=True)
+
+                # ── Per-model breakdown table ─────────────────────────────────
+                st.markdown("**Per-Model Breakdown**")
+                model_detail = []
+                for m, v in summary["by_model"].items():
+                    from llm.metrics_tracker import MODEL_PROVIDER, MODEL_COSTS, DEFAULT_COST
+                    tok_in  = v.get("tokens_in", 0)
+                    tok_out = v.get("tokens_out", 0)
+                    model_detail.append({
+                        "Provider":          MODEL_PROVIDER.get(m, "Other"),
+                        "Model":             MODEL_DISPLAY.get(m, m),
+                        "Calls":             v["calls"],
+                        "Input Tokens":      tok_in,
+                        "Output Tokens":     tok_out,
+                        "Total Tokens":      tok_in + tok_out,
+                        "Avg Latency (ms)":  round(v.get("total_latency_ms", 0) / v["calls"], 1) if v["calls"] else 0,
+                        "Est. Cost (USD)":   round(v.get("cost_usd", 0.0), 6),
+                    })
+                if model_detail:
+                    detail_df = pd.DataFrame(model_detail).sort_values(["Provider", "Model"])
+                    st.dataframe(detail_df, use_container_width=True)
+                    st.caption(
+                        "ℹ️ Cost estimates use approximate Azure-hosted rates: "
+                        "OpenAI ~$0.005/1K input, ~$0.015/1K output · "
+                        "Anthropic ~$0.003/1K input, ~$0.015/1K output. "
+                        "Token counts are character-based estimates (chars ÷ 4)."
+                    )
 
             # ── Raw records expandable ─────────────────────────────────────────
             st.divider()

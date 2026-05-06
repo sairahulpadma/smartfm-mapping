@@ -61,6 +61,27 @@ MODEL_DISPLAY: Dict[str, str] = {
     "claude-3-5-sonnet":  "Azure Anthropic Claude 3.5 Sonnet",
 }
 
+# ── Provider classification ───────────────────────────────────────────────────
+MODEL_PROVIDER: Dict[str, str] = {
+    "gpt-5.5_1":          "OpenAI",
+    "gpt-5.5":            "OpenAI",
+    "gpt-4o":             "OpenAI",
+    "claude-sonnet-4-6":  "Anthropic",
+    "claude-3-5-sonnet":  "Anthropic",
+}
+
+# ── Approximate cost rates (USD per 1 000 tokens) ─────────────────────────────
+# These are indicative Azure-hosted estimates; update when pricing changes.
+MODEL_COSTS: Dict[str, Dict[str, float]] = {
+    "gpt-5.5_1":         {"input": 0.005,  "output": 0.015},
+    "gpt-5.5":           {"input": 0.005,  "output": 0.015},
+    "gpt-4o":            {"input": 0.005,  "output": 0.015},
+    "claude-sonnet-4-6": {"input": 0.003,  "output": 0.015},
+    "claude-3-5-sonnet": {"input": 0.003,  "output": 0.015},
+}
+
+DEFAULT_COST = {"input": 0.004, "output": 0.015}  # fallback
+
 # ── Purpose labels (for dashboard legend) ────────────────────────────────────
 PURPOSE_LABELS: Dict[str, str] = {
     "asset_matching_reason":   "Asset Matching — LLM Reason Node",
@@ -152,6 +173,7 @@ def get_summary() -> Dict[str, Any]:
             "by_model":         {},
             "by_purpose":       {},
             "by_pipeline":      {},
+            "by_provider":      {},
             "timeline":         [],
         }
 
@@ -164,27 +186,56 @@ def get_summary() -> Dict[str, Any]:
     by_model: Dict[str, Dict[str, Any]] = {}
     by_purpose: Dict[str, Dict[str, Any]] = {}
     by_pipeline: Dict[str, Dict[str, Any]] = {}
+    by_provider: Dict[str, Dict[str, Any]] = {}
 
     for r in records:
-        m   = r["model"]
-        p   = r.get("purpose", "unknown")
-        pl  = r.get("pipeline", "unknown")
-        suc = bool(r.get("success", False))
-        lat = r.get("latency_ms", 0)
+        m    = r["model"]
+        p    = r.get("purpose", "unknown")
+        pl   = r.get("pipeline", "unknown")
+        suc  = bool(r.get("success", False))
+        lat  = r.get("latency_ms", 0)
+        tok_in  = r.get("tokens_in_est", 0)
+        tok_out = r.get("tokens_out_est", 0)
 
+        costs = MODEL_COSTS.get(m, DEFAULT_COST)
+        call_cost = (tok_in / 1000) * costs["input"] + (tok_out / 1000) * costs["output"]
+
+        # by_model
         if m not in by_model:
-            by_model[m] = {"calls": 0, "success": 0, "total_latency_ms": 0}
+            by_model[m] = {
+                "calls": 0, "success": 0, "total_latency_ms": 0,
+                "tokens_in": 0, "tokens_out": 0, "cost_usd": 0.0,
+            }
         by_model[m]["calls"] += 1
         by_model[m]["success"] += int(suc)
         by_model[m]["total_latency_ms"] += lat
+        by_model[m]["tokens_in"] += tok_in
+        by_model[m]["tokens_out"] += tok_out
+        by_model[m]["cost_usd"] += call_cost
 
+        # by_purpose
         if p not in by_purpose:
             by_purpose[p] = {"calls": 0}
         by_purpose[p]["calls"] += 1
 
+        # by_pipeline
         if pl not in by_pipeline:
             by_pipeline[pl] = {"calls": 0}
         by_pipeline[pl]["calls"] += 1
+
+        # by_provider (OpenAI vs Anthropic)
+        provider = MODEL_PROVIDER.get(m, "Other")
+        if provider not in by_provider:
+            by_provider[provider] = {
+                "calls": 0, "success": 0, "total_latency_ms": 0,
+                "tokens_in": 0, "tokens_out": 0, "cost_usd": 0.0,
+            }
+        by_provider[provider]["calls"] += 1
+        by_provider[provider]["success"] += int(suc)
+        by_provider[provider]["total_latency_ms"] += lat
+        by_provider[provider]["tokens_in"] += tok_in
+        by_provider[provider]["tokens_out"] += tok_out
+        by_provider[provider]["cost_usd"] += call_cost
 
     timeline = [
         {
@@ -205,6 +256,7 @@ def get_summary() -> Dict[str, Any]:
         "by_model":         by_model,
         "by_purpose":       by_purpose,
         "by_pipeline":      by_pipeline,
+        "by_provider":      by_provider,
         "timeline":         timeline,
     }
 

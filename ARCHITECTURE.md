@@ -278,7 +278,7 @@ sequenceDiagram
 | `pipeline/review_queue.py` | SQLite human review queue | Parameterised SQL only |
 | `pipeline/orchestrator.py` | End-to-end pipeline + `process_batch()` | 300ms inter-event delay for rate limit protection |
 | `llm/chat_agent.py` | LangChain ReAct chat agent | Claude primary, GPT fallback; `anthropic_api_key` + `anthropic_api_url` params |
-| `llm/metrics_tracker.py` | Singleton LLM call tracker | Thread-safe, append-only JSONL |
+| `llm/metrics_tracker.py` | Singleton LLM call tracker — tokens, cost, provider aggregation | Thread-safe, append-only JSONL; exposes `MODEL_PROVIDER`, `MODEL_COSTS`, `by_provider` |
 | `llm/service_classification_agent.py` | GPT-5.5 Tier 3 LLM classify | Compact prompt, `max_completion_tokens=256` |
 | `llm/prompts.py` | System prompts & few-shot examples | |
 | `data/service_catalog.json` | 23 IFM service classifications | Includes 3 multi-asset entries |
@@ -536,7 +536,61 @@ Azure Static Web Apps + FastAPI (dashboard backend)
 | Streamlit | Azure Static Web Apps + FastAPI |
 
 
-> Version 1.0 | May 2025 | Hackathon Edition
+---
+
+## Appendix A — LLM Analytics: OpenAI vs Anthropic Comparison
+
+Tab 6 includes a **Head-to-Head Provider Comparison** section that aggregates all recorded LLM calls by provider (OpenAI / Anthropic).
+
+### A.1 Provider KPI Cards
+Coloured cards (🔵 blue = OpenAI, 🟡 yellow = Anthropic) showing per-provider totals:
+- Total API calls
+- Total tokens consumed (input + output)
+- Average latency (ms)
+- Estimated cost (USD)
+
+### A.2 Comparison Charts (3-column layout)
+
+| Chart | What it shows |
+|---|---|
+| **Token Usage** | Grouped bar — Input vs Output tokens per provider |
+| **Average Latency** | Bar chart — provider-level average API response time |
+| **Estimated Cost** | Bar chart — indicative USD spend per provider |
+
+### A.3 Per-Model Breakdown Table
+
+| Column | Source |
+|---|---|
+| Provider | `MODEL_PROVIDER` dict in `llm/metrics_tracker.py` |
+| Model | `MODEL_DISPLAY` name |
+| Calls | Count of `record()` invocations |
+| Input / Output Tokens | `tokens_in_est` / `tokens_out_est` (chars ÷ 4) |
+| Total Tokens | Sum of above |
+| Avg Latency (ms) | `total_latency_ms ÷ calls` |
+| Est. Cost (USD) | `(tok_in / 1000) × input_rate + (tok_out / 1000) × output_rate` |
+
+### A.4 Indicative Azure Cost Rates
+
+| Model | Input (per 1K tokens) | Output (per 1K tokens) |
+|---|---|---|
+| Azure OpenAI GPT-5.5 (`gpt-5.5_1`) | $0.005 | $0.015 |
+| Azure Anthropic Claude Sonnet 4.6 | $0.003 | $0.015 |
+
+> Update `MODEL_COSTS` in `llm/metrics_tracker.py` when pricing changes.
+
+### A.5 Data Flow
+
+```mermaid
+flowchart LR
+    A[LLM API call] --> B[metrics_tracker.record()]
+    B --> C[_in_memory list\nThread-safe Lock]
+    B --> D[(llm_metrics.jsonl\nappend-only)]
+    C --> E[get_summary()]
+    E --> F[by_model\ntokens_in · tokens_out · cost_usd]
+    E --> G[by_provider\naggregated OpenAI / Anthropic]
+    F & G --> H[Tab 6 — LLM Analytics\nKPI cards · 3 charts · breakdown table]
+```
+
 
 ---
 

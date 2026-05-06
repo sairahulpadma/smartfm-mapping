@@ -32,7 +32,7 @@
 | **Work Order Creation** | Auto-creates IFM Hub work orders for high-confidence matches |
 | **Review Queue** | Queues ambiguous matches for human approval before submitting to IFM Hub |
 | **AI Chat** | Natural language Q&A over your mapping results via LangChain ReAct + Claude Sonnet 4.6 |
-| **LLM Analytics** | Real-time tracking of every LLM API call — model, latency, tokens, success rate |
+| **LLM Analytics** | Real-time tracking of every LLM API call — model, latency, tokens, cost, and OpenAI vs Anthropic head-to-head comparison |
 | **Active Learning** | Approved/rejected reviews feed back into the training dataset |
 
 ### 4-Tier Decision Rules
@@ -274,7 +274,13 @@ The dashboard has **6 tabs**:
 - Pie chart: calls by purpose (asset matching / service classification / chat / verify)
 - Bar chart: calls by pipeline stage
 - Line chart: latency over time per model
-- Model performance comparison table
+- Model performance comparison table (calls, successes, failures, success rate, avg latency)
+- **⚖️ OpenAI vs Anthropic Head-to-Head Comparison**
+  - Provider KPI cards — calls, total tokens, avg latency, estimated cost per provider
+  - Token usage chart — grouped bar showing input vs output tokens per provider
+  - Average latency chart — per-provider bar comparison
+  - Estimated cost chart — USD cost per provider (indicative Azure-hosted rates)
+  - Per-model breakdown table — drills to individual model-level token/cost/latency detail
 - Raw call log with CSV download
 
 ---
